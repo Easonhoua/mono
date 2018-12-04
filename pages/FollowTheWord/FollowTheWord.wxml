@@ -1,0 +1,17 @@
+<view class="followWordView">
+  <view class="followWordTop">请在生活中拍摄以下单词的物品</view>
+  <view class="pictureView">
+  <block wx:for='{{ DataList }}' wx:key='item'>
+    <view class="pictureViewItem" bindtap="chooseimage" data-index='{{ index }}' data-item="{{ item }}">
+      <view class="imageBtn"> 
+        <image src="{{ tempFilePaths }}" mode="aspecFill" class="imageBox"/>
+        <image src="{{ item.src }}" class="realimage"/>  
+        <image src="../.. /images/RIght2.png" hidden='{{ item.rightIcon }}' class="rightIcon"></image>
+        <image src="../../images/error2.png" hidden="{{ item.errorIcon }}" class="errorIcon"></image>
+      </view>
+      <view class="imageWord">{{item.name}}</view>
+    </view>
+    </block>
+  </view>
+</view>
+

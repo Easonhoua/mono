@@ -1,0 +1,99 @@
+/* pages/R-Units/R-Units.wxss */
+
+.RenjiaoView{
+  width: 750rpx;
+  height: auto;
+}
+.RenjiaoTop{
+  width: 750rpx;
+  height: 80rpx;
+  background: #F2FBFF;
+  line-height: 70rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #32BBFF;
+  letter-spacing: 0;
+  text-indent: 20rpx;
+}
+
+.course-listR_item{
+  width: 750rpx;
+  height: auto;
+}
+
+.whichUnit{
+  width: 750rpx;
+  min-height: 66rpx;
+  line-height: 66rpx;
+  display: flex;
+}
+
+.unitView{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1rpx solid #FF6259;
+  border-radius: 10rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #FF6259;
+  letter-spacing: 0;
+  margin:8rpx 0 0 26rpx;
+}
+
+.unittitle{
+  font-family: PingFang-SC-Regular;
+  font-size: 16px;
+  color: #FF837B;
+  letter-spacing: 1px;
+  margin-left:20rpx;
+}
+
+.lessonMenu{
+  width: 750rpx;
+  min-height: 100rpx;
+  padding: 0 0 20rpx 0;
+  background: #ffffff;
+}
+
+.lesson{
+  width: 750rpx;
+  min-height: 80rpx;
+  padding: 20rpx 0 0 0;
+}
+
+.txt{
+  width: 22%;
+  float: left;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-right: 20rpx;
+  text-indent: 20rpx;
+}
+.commonaa{
+  width: 22%;
+  float: left;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-right: 20rpx;
+  text-align: center;
+  background: rgba(204,204,204,0.25);
+  border-radius: 5px;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #999999;
+}
+
+.suipaibtn{
+  background: rgba(50,187,255,0.08);
+  color: #32BBFF;
+}
+.gendubtn{
+  background: rgba(255,186,95,0.08);
+  color: #FD9937;
+}
+.waijiaobtn{
+  background: rgba(112,222,46,0.08);
+  color: #70DE2E;
+}

@@ -1,0 +1,11 @@
+<view class="RenjiaoView">
+    <view class="course-listR">
+      <block wx:for="{{list}}" wx:key="id">
+        <view class="course-listR_item {{ item.active }}" bindtap='goUnit' data-tid="{{ item.tid }}" data-whichclass="{{ item.name }}">
+              <view class="itemView ">
+                <text>{{ item.name }}</text>
+              </view>
+        </view>
+      </block>
+    </view>
+</view>

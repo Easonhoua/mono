@@ -1,0 +1,75 @@
+/* pages/FollowTheWord/FollowTheWord.wxss */
+.followWordTop{
+  width: 750rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 36rpx;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+
+.pictureView{
+
+}
+
+.pictureViewItem{
+  width:345rpx;
+  height:442rpx;
+  border: 1px solid #CCCCCC;
+  border-radius: 7.5px;
+  float: left;
+  margin: 20rpx 0 0 20rpx;
+}
+
+
+.imageBtn{
+  width: 345rpx;
+  height: 345rpx;
+  background: rgba(204,204,204,0.25);
+  border-radius: 7.5px 7.5px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.imageBox{
+  width: 120rpx;
+  height: 101.6rpx;
+}
+
+
+.realimage{
+  width: 345rpx;
+  height: 345rpx;
+  position: absolute;
+}
+
+.imageWord{
+  height: 97rpx;
+  text-align: center;
+  line-height: 97rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 48rpx;
+  color: #32BBFF;
+}
+
+.rightIcon{
+  width: 40rpx;
+  height: 26rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  z-index: 1000;
+}
+.errorIcon{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  z-index: 1000;
+}

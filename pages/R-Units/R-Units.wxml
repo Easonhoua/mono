@@ -1,0 +1,25 @@
+<view class="RenjiaoView">
+  <view class="RenjiaoTop">当前课程：{{ curClass }}</view>
+  <view class="RenjiaoBottom">
+    <view class="course-listR">
+        <block wx:for="{{list}}" wx:key="tid">
+          <view class="course-listR_item">
+            <view class="whichUnit">
+              <view class="unitView">{{ item.name }}</view>
+              <view class="unittitle">{{ item.title }} </view>
+            </view>
+            <view class="lessonMenu">
+              <block wx:for="{{ item.lessons }}" wx:key="id" wx:for-item="lessonsitems">
+              <view class="lesson">
+                <text class="txt ">{{ lessonsitems.lessonName }}</text>
+                  <view class="commonaa suipaibtn" wx:if="{{ lessonsitems.listWord != undefined }}"><navigator url="../FollowTheWord/FollowTheWord?tid={{lessonsitems.tid}}&listword={{ lessonsitems.listWord }}">随拍单词</navigator></view>
+                <view class="commonaa gendubtn"><navigator url="../ReadTheText/ReadTheText?&tid={{ lessonsitems.tid }}">跟读课文</navigator></view>
+                <!-- <view class="commonaa waijiaobtn"><navigator url="#">外教陪读</navigator></view> -->
+              </view>
+              </block>
+            </view>                               
+          </view>
+        </block>
+      </view>
+  </view>
+</view>

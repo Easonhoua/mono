@@ -1,0 +1,25 @@
+<view class="readPagecontainer">
+  <view class="readPageTop">{{ toptitle }}</view>
+  <view class="readpagebottom">
+      <view class="dancibox" wx:if="{{ a }}">
+        <view class="textbox">{{ onlyText }}</view> 
+          <image class="bofangBtn" src = '../../images/paly2.png'  bindtap="monoyuyin"></image>
+          <image class="rightplay" hidden='{{ Brightplay }}' src = "../../images/RIght2.png" bindtap='mineluyin'></image>
+          <image class="wrongplay" hidden='{{ Bwrongplay }}' src="../../images/error2.png" bindtap='mineluyin'></image>
+        </view>
+
+      <view class="readPart" wx:else="{{ b}}">
+        <view class="readPartbox">{{ onlyText }}</view> 
+          <image class="readPartbofangBtn" src = '../../images/paly2.png'  bindtap="monoyuyin"></image>
+          <image class="readPartrightplay" hidden='{{ Brightplay }}' src = "../../images/RIght2.png" bindtap='mineluyin'></image>
+          <image class="readPartwrongplay" hidden='{{ Bwrongplay }}' src="../../images/error2.png" bindtap='mineluyin'></image>
+      </view>
+</view>
+  
+    <view class="ask-input-word">
+      <view  bindtouchstart="touchdown" bindtouchend="touchup" class="talkBtn"><image src="../../images/holdtalk.png" class="talkimg"></image><text class="anzhuBtn">按住说话</text></view>
+    </view>
+</view>
+<image class="speaker" hidden="{{!isSpeaking}}" src="{{speakerUrl}}"></image>
+
+

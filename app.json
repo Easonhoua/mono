@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/RenjiaoEnglish/RenjiaoEnglish",
+    "pages/R-Units/R-Units",
+    "pages/FollowTheWord/FollowTheWord",
+    "pages/ReadTheText/ReadTheText"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "魔脑学习",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "color": "#9d9d9d",
+    "selectedColor": "#202020",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "课程",
+        "iconPath": "images/curriculum2.png",
+        "selectedIconPath": "images/curriculumPress2.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/Mine2.png",
+        "selectedIconPath": "images/MinePress2.png"
+      }
+    ]
+  }
+}
