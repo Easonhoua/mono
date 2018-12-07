@@ -1,5 +1,5 @@
 var app = getApp();
-const httpUrl = app.globalData.Monohttps
+const Monohttps = app.globalData.Monohttps
 
 Page({
   data: {
@@ -15,6 +15,28 @@ Page({
     let optData2 = options.lan
     wx.setStorageSync('val', optData1)
     wx.setStorageSync('lan', optData2)
+    if (optData1 = '0'){
+      wx.setNavigationBarTitle({
+        title: '英语派分册'
+      })
+    } else if (optData1 = '1'){
+      wx.setNavigationBarTitle({
+        title: '人教版分册'
+      })
+    } else if (optData1 = '2'){
+      wx.setNavigationBarTitle({
+        title: '加州小学分册'
+      })
+    } else if (optData1 = '3'){
+      wx.setNavigationBarTitle({
+        title: '牛津小学分册'
+      })
+    } else if (optData1 = '4'){
+      wx.setNavigationBarTitle({
+        title: '研究社分册'
+      })
+    }
+    
     let param = {
       classType: optData1,
       classLanguage: optData2
@@ -27,7 +49,7 @@ Page({
       ver: "1.0"
     }
     wx.request({
-      url: httpUrl +'/mono-biz-app/educationMiniProgram/queryClassVolume',
+      url: Monohttps +'/mono-biz-app/educationMiniProgram/queryClassVolume',
       method: 'post',
       data: paramJson,
       success: function (res) {
@@ -41,17 +63,5 @@ Page({
       }
     })
   },
-  goUnit: function(ev) {              
-    let evData = ev.currentTarget.dataset
-    wx.navigateTo({
-      url: '../R-Units/R-Units?tid=' + evData.tid + '&whichclass=' + evData.whichclass,
-    })
-  },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -1,4 +1,7 @@
 /**index.wxss**/
+page{
+  background-color: #ffffff;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -60,7 +63,6 @@ swiper {
 }
 
 .kind-list__item {
-  /* margin: 10px 0; */
   background-color: #fff;
   border-radius: 2px;
   overflow: hidden;
@@ -71,16 +73,16 @@ swiper {
 }
 
 .kind-list__img {
-  width:710rpx;
-  height:260rpx;
+  width: 710rpx;
+  height: 260rpx;
 }
 
 .kind-list__item-hd {
-  padding:0 20rpx 20rpx 20rpx;
-  width:710rpx;
-  height:260rpx;
-  -webkit-transition:opacity 0.3s;
-  transition:opacity 0.3s;
+  padding: 0 20rpx 20rpx 20rpx;
+  width: 710rpx;
+  height: 260rpx;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
 }
 
 .kind-list__item-hd_show {
@@ -96,6 +98,8 @@ swiper {
   height: auto;
 }
 
+
+/**index.wxss**/
 
 .show-btn {
   margin-top: 100rpx;

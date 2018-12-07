@@ -1,5 +1,3 @@
-
-
 //md5加密算法
 function md5(string) {
   var x = Array();

@@ -1,0 +1,53 @@
+.RenjiaoView{
+  width: 750rpx;
+  height: auto;
+}
+.RenjiaoTop{
+  width: 750rpx;
+  height: 80rpx;
+  background: #F2FBFF;
+  line-height: 70rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #32BBFF;
+  letter-spacing: 0;
+  text-indent: 20rpx;
+}
+
+.course-listR_item{
+  width: 750rpx;
+  height: auto;
+}
+
+.whichUnit{
+  width: 750rpx;
+  min-height: 100rpx;
+  display: flex;
+  margin-top:20rpx;
+
+}
+
+.unitView{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1rpx solid #FF6259;
+  border-radius: 10rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #FF6259;
+  letter-spacing: 0;
+  margin:8rpx 0 0 26rpx;
+}
+
+.unittitle{
+  width:600rpx;
+  font-family: PingFang-SC-Regular;
+  font-size: 32rpx;
+  color: #FF837B;
+  letter-spacing: 1px;
+  margin-left:20rpx;
+  line-height:66rpx;
+
+}

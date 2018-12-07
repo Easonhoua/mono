@@ -1,0 +1,16 @@
+<view class="outview">
+  <view class="topcontainer">
+    <image class="detailImg" ></image>
+    <text class="titleTxt">{{ titleTxt }}</text>
+    <text class="newprice">￥9.00</text>
+    <text class="oldprice">原价￥20.00</text>
+    <text class="totalsell">销量：2998</text>
+</view>
+  <view class="bottomcontainer">
+    <image class="kefuimg" src="../../images/kefuimg.png"></image>
+    <text class="kefutxt">客服</text>
+    <view class="goumaiBtn">立即购买</view>
+  </view>
+</view>
+
+

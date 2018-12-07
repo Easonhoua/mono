@@ -1,14 +1,15 @@
-// pages/R-Units/R-Units.js
-var app = getApp()
-const Monohttps = app.globalData.Monohttps;
+// pages/courseTitle/coursetitle.js
 
+var app = getApp();
+const Monohttps = app.globalData.Monohttps
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    curClass:'',
-    list: {}
+    curClass: '',
+    list: []
   },
 
   /**
@@ -16,37 +17,38 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-
     var optData1 = wx.getStorageSync('val')
     if (optData1 = '0') {
       wx.setNavigationBarTitle({
-        title: '英语派课文'
+        title: '英语派单元'
       })
     } else if (optData1 = '1') {
       wx.setNavigationBarTitle({
-        title: '人教版课文'
+        title: '人教版单元'
       })
     } else if (optData1 = '2') {
       wx.setNavigationBarTitle({
-        title: '加州小学课文'
+        title: '加州小学单元'
       })
     } else if (optData1 = '3') {
       wx.setNavigationBarTitle({
-        title: '牛津小学课文'
+        title: '牛津小学单元'
       })
     } else if (optData1 = '4') {
       wx.setNavigationBarTitle({
-        title: '研究社课文'
+        title: '研究社单元'
       })
     }
 
+
     let tid = options.tid
-    let whichclass = wx.getStorageSync('whichclass')
+    let whichclass = options.whichclass
+    wx.setStorageSync('whichclass', whichclass)
     that.setData({
       curClass: whichclass
     })
     var param = {
-      unit: tid
+      volume: tid
     }
     var paramJson = {
       body: param,
@@ -55,9 +57,8 @@ Page({
       token: "",
       ver: "1.0"
     }
-
     wx.request({
-      url: Monohttps + '/mono-biz-app/educationMiniProgram/queryClassLesson',
+      url: Monohttps + '/mono-biz-app/educationMiniProgram/queryClassUnit',
       method: 'post',
       data: paramJson,
       success: function (res) {
@@ -68,18 +69,57 @@ Page({
         })
       },
       fail: function (fail) {
-        wx.showToast({
-          title: '网络异常！',
-        })
+        console.log(fail)
       }
     })
   },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

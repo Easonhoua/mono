@@ -1,16 +1,20 @@
 var app = getApp();
 var that;
 const recorderManager = wx.getRecorderManager();
-var res = wx.getSystemInfoSync()
+var res = wx.getSystemInfoSync();
 if (res.platform == 'ios') {
   var myaudio = wx.getBackgroundAudioManager();
 } else {
   var myaudio = wx.createInnerAudioContext();
 }
+var MD5 = require('../../utils/MD5.js');
+var WxParse = require('../wxParse/wxParse.js');
 const Monohttps = app.globalData.Monohttps;
 const websocketaddr = app.globalData.websocketaddr;
+var SocketTask;
+var socketOpen = false;
 var n = 0;
-var a= 0
+var a = 0;
 Page({
   data: {
     speakerUrl: '../../images/speaker0.png',
@@ -25,36 +29,16 @@ Page({
     wordsarr: [],
     dialoguesarr: [],
     readPartsarr: [],
-    a :false,
-    b: false
+    a: false,
+    b: false,
+    // score: ''
   },
 
   onLoad: function (e) {
-    wx.showLoading({
-      title: '加载中',
-    })
     that = this
-
-
-  //连接webSocket
-    wx.connectSocket({
-      url: websocketaddr +'/ws?e=0&t=0&version=2',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success:function(res){
-        console.log(res)
-      }
-    })
-
-
-
-
-
-
-
-
+    if (!socketOpen) {
+      that.webSocket()
+    }
     var tid = e.tid
     var param = {
       tid: tid
@@ -77,13 +61,15 @@ Page({
         if (words) {
           that.setData({
             wordsarr: words,
-            a : true
+            a: true,
+            b: false
           })
         }
         if (dialogues) {
           that.setData({
             dialoguesarr: dialogues,
-            a: true
+            a: true,
+            b: false
           })
         }
         if (readParts) {
@@ -96,14 +82,230 @@ Page({
         that.ObtainData();
       },
       fail: function (fail) {
-        console.log(fail)
+        wx.showToast({
+          title: '网络异常！',
+        })
       }
     })
   },
 
-  onShow() {
-    wx.hideLoading()
+  onReady() {
+    that = this;
+    SocketTask.onOpen(res => {
+      // console.log('open了')
+      socketOpen = true;
+      var timestamp = new Date().getTime()
+      var sig = MD5.md5('1543281970000043' + timestamp + '665309ac00d60d0c804caf8e9cf93c4e')
+      var jsonData1 = '{"app":{"applicationId":"1543281970000043", "sig": "' + sig + '","alg": "md5","timestamp":"' + timestamp + '", "userId": "mono100669"}}'
+      that.sendSocketMessage(jsonData1)//验证用户信息
+    })
+
+    SocketTask.onClose(onClose => {
+      socketOpen = false;
+    })
+    SocketTask.onError(onError => {
+      socketOpen = false;
+      that.webSocket()
+      wx.showToast({
+        title: '连接失败！',
+      })
+    })
+
+
+    SocketTask.onMessage(onMessage => {
+      var useData = JSON.parse(onMessage.data).result
+      if (useData == undefined) {
+        wx.showToast({
+          title: '语音异常',
+          duration: 2000,
+          mask: true
+        })
+
+        SocketTask.close({
+          success: function (res) {
+            that.webSocket()
+          }
+        })
+       
+      } else {
+        // that.setData({
+        //   score: useData.overall
+        // })
+        var wordsarr = that.data.wordsarr
+        var dialoguesarr = that.data.dialoguesarr
+        var readPartsarr = that.data.readPartsarr
+        if (useData.overall >= 80) {
+          that.setData({
+            Brightplay: false,
+            Bwrongplay: true,
+          })
+          myaudio.title = '兼容ios的title'
+          myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-ROyAWhBfAAAvanH_WC0883.mp3";
+          myaudio.play();
+
+          if (wordsarr != '') {
+            wordsarr.splice(0, 1)
+            that.setData({
+              wordsarr: wordsarr
+            })
+          } else if (dialoguesarr != '') {
+            that.setData({
+              dialoguesarr: dialoguesarr
+            })
+          } else if (readPartsarr != '') {
+            readPartsarr.splice(0, 1)
+            that.setData({
+              readPartsarr: readPartsarr
+            })
+          }
+          setTimeout(function () {
+            that.ObtainData()
+          }, 1000)
+          a =0;
+        } else if (useData.overall < 80) {
+          that.setData({
+            Bwrongplay: false,
+            Brightplay: true
+          })
+          if (a < 2) {
+            myaudio.title = '兼容ios的title'
+            myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
+            myaudio.play();
+            a++;
+          } else {
+            a = 0;
+            myaudio.title = '兼容ios的title'
+            myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
+            myaudio.play();
+
+            if (wordsarr != '') {
+              wordsarr.splice(0, 1)
+              that.setData({
+                wordsarr: wordsarr
+              })
+            } else if (dialoguesarr != '') {
+              that.setData({
+                dialoguesarr: dialoguesarr
+              })
+            } else if (readPartsarr != '') {
+              readPartsarr.splice(0, 1)
+              that.setData({
+                readPartsarr: readPartsarr
+              })
+            }
+            setTimeout(function () {
+              that.ObtainData()
+            }, 1000)
+          }
+        }
+      }
+    })
   },
+
+  webSocket: function () {
+    // 创建Socket
+    SocketTask = wx.connectSocket({
+      url: websocketaddr + '/ws?e=0&t=0&version=2',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'post',
+      success: function (res) {
+        console.log('WebSocket连接创建', res)
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: '网络异常！',
+        })
+      },
+    })
+  },
+
+
+  sendSocketMessage(msg) {
+    var that = this;
+    SocketTask.send({
+      data: msg,
+      success: function (res) {
+        console.log('已发送', res)
+      },
+      fail: function (fail) {
+        wx.showToast({
+          title: '信息发送失败！',
+        })
+      }
+    })
+  },
+
+
+  // 按钮按下
+  touchdown: function () {
+    that = this;
+    that.setData({
+      Bwrongplay: true,
+      Brightplay: true,
+      isSpeaking: true
+    })
+    that.speaking.call();
+    const options = {
+      duration: 180000,
+      sampleRate: 16000,
+      numberOfChannels: 1,
+      encodeBitRate: 96000,
+      format: 'mp3',
+      frameSize: 50
+    }
+    recorderManager.start(options);
+    recorderManager.onStart(() => {
+      
+    });
+
+    recorderManager.onError((res) => {
+      console.log(res)
+      wx.showToast({
+        title: '网络异常！',
+      })
+    });
+  },
+
+  // // 按钮松开
+  touchup: function () {
+    that = this;
+    //  结束录音
+    recorderManager.stop();
+    that.setData({
+      isSpeaking: false,
+      speakerUrl: '../../images/speaker0.png',
+    })
+
+    clearInterval(that.speakerInterval);
+    recorderManager.onStop(function (res) {
+      var wordtxt = that.data.onlyText
+      var timestamp = new Date().getTime()
+      if (that.data.wordsarr != '') {
+        var  jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.word.score","rank": 100,"refText": "' + wordtxt + '","userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      } else if (that.data.dialoguesarr != '') {
+        var  jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.sent.score","rank": 100,"refText": "' + wordtxt + '","userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      } else if (that.data.readPartsarr != '') {
+        var  jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.pred.exam","rank": 100,"refText":{"lm":"' + wordtxt +'"},"userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      }
+      that.sendSocketMessage(jsonData2)
+      var filePath = res.tempFilePath
+      var FileSystemManager = wx.getFileSystemManager();
+      FileSystemManager.readFile({
+        filePath: filePath,
+        success: function (ret) {
+          var bufferStr = ret.data;
+          that.sendSocketMessage(bufferStr)
+          that.sendSocketMessage('{"cmd":"stop"}')
+        }
+      })
+
+    });
+
+  },
+
+
 
   //获取单词数据
   ObtainData() {
@@ -157,7 +359,6 @@ Page({
         method: 'post',
         data: paramJson,
         success: function (res) {
-          // console.log(res)
           var titlecontent = res.data.body.content
           var danci = res.data.body.word
           var danciSrc = res.data.body.wordAudio
@@ -187,6 +388,8 @@ Page({
                 duihua: dialogues,
                 yuanshiSrc: duihuacur,
                 onlyText: duihuaText,
+                a: true,
+                b: false
               })
 
               setTimeout(function () {
@@ -196,7 +399,6 @@ Page({
                 myaudio.play();
               }, 1000)
               n++;
-              console.log(n)
             } else {
               n = 0;
               var dialoguesarr = that.data.dialoguesarr
@@ -209,6 +411,8 @@ Page({
               that.ObtainData();
             }
           } else if (readPart != undefined) {
+            var readPartreal = res.data.body.readPart.replace('[', '<strong>').replace(']', '</strong>').replace(/@/g, '<br/><br/>')
+            var readParttrue = WxParse.wxParse('readParttxt', 'html', readPartreal, that, 0);
             that.setData({
               toptitle: titlecontent,
               onlyText: readPart,
@@ -222,188 +426,21 @@ Page({
               myaudio.play();
             }, 1000)
           }
-
         },
         fail: function (fail) {
-          console.log(fail)
-        }
-      })
-    }
-  },
-
-  // 按钮按下
-  touchdown: function () {
-    that = this;
-    that.speaking.call();
-    that.setData({
-      Bwrongplay: true,
-      Brightplay: true,
-      isSpeaking: true
-    })
-    const options = {
-      duration: 10000,
-      sampleRate: 16000,
-      numberOfChannels: 1,
-      encodeBitRate: 96000,
-      format: 'mp3',
-      frameSize: 50
-    }
-    recorderManager.start(options);
-    recorderManager.onStart(() => {
-      console.log('recorder start');
-    });
-
-    recorderManager.onError((res) => {
-      console.log(res);
-    });
-  },
-
-  // // 按钮松开
-  touchup: function () {
-    that = this;
-    //  结束录音
-    recorderManager.stop();
-    that.setData({
-      isSpeaking: false,
-      speakerUrl: '../../images/speaker0.png',
-    })
-    clearInterval(that.speakerInterval);
-    recorderManager.onStop(function (res) { 
-      var filePath = res.tempFilePath
-      that.setData({
-        src: filePath
-      })
-
-      var param = {
-        evaluator: that.data.onlyText,
-        sys: "1",
-        sysVer: "html5",
-        token: "",
-        ver: "1.0"
-      }
-      console.log(param)
-      that.getData(param, filePath);
-    });
-  },
-
-
-  getData(param, filePath) {
-    wx.uploadFile({
-      url: Monohttps + '/mono-biz-app/recognizer/voiceEvaluator.shtml',
-      filePath: filePath,
-      formData: param,
-      name: "file",
-      success(ret) {
-        var useData = JSON.parse(ret.data)
-        if (useData.code == 1) {
           wx.showToast({
-            title: '语音异常',
-            duration: 2000,
-            mask: true
+            title: '网络异常！',
           })
-        } else {
-          var wordsarr = that.data.wordsarr
-          var dialoguesarr = that.data.dialoguesarr
-          var readPartsarr = that.data.readPartsarr
-
-          if (useData.code == 0 && useData.score >= 60) {
-            that.setData({
-              Brightplay: false,
-              Bwrongplay: true,
-            })
-
-            myaudio.title = '兼容ios的title'
-            myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-ROyAWhBfAAAvanH_WC0883.mp3";
-            myaudio.play();
-
-            if (wordsarr != '') {
-              wordsarr.splice(0, 1)
-              that.setData({
-                wordsarr: wordsarr
-              })
-            } else if (dialoguesarr != '') {
-              that.setData({
-                dialoguesarr: dialoguesarr
-              })
-            } else if (readPartsarr != '') {
-              readPartsarr.splice(0, 1)
-              that.setDat({
-                readPartsarr: readPartsarr
-              })
-            }
-            setTimeout(function(){
-              that.ObtainData()
-            },1000)
-          } else if (useData.code == 0 && useData.score <= 60) {
-            that.setData({
-              Bwrongplay: false,
-              Brightplay: true
-            })
-            if(a<2){
-              myaudio.title = '兼容ios的title'
-              myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
-              myaudio.play();
-              a++;
-            }else{
-              a=0;
-              myaudio.title = '兼容ios的title'
-              myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
-              myaudio.play();
-
-              if (wordsarr != '') {
-                wordsarr.splice(0, 1)
-                that.setData({
-                  wordsarr: wordsarr
-                })
-              } else if (dialoguesarr != '') {
-                that.setData({
-                  dialoguesarr: dialoguesarr
-                })
-              } else if (readPartsarr != '') {
-                readPartsarr.splice(0, 1)
-                that.setDat({
-                  readPartsarr: readPartsarr
-                })
-              }
-              setTimeout(function () {
-                that.ObtainData()
-              }, 1000)
-            }
-            
-          }
         }
-      },
-      fail(err) {
-        wx.hideLoading();
-        console.log("录音发送到后台失败");
-        console.log(err);
-      }
-    })
+      })
+    }
   },
 
-
-  // //播放自己录音
-  // mineluyin: function () {
-  //   myaudio.onError((res) => {
-  //     // 播放音频失败的回调
-  //     console.log(res)
-  //   })
-  //   myaudio.title = '测试'
-  //   myaudio.src = this.data.src; // 这里可以是录音的临时路径
-  //   if (myaudio.paused) {
-  //     myaudio.play();
-  //     return;
-  //   } else {
-  //     myaudio.pause()
-  //   }
-  // },
 
 
   //播放原始语音
   monoyuyin(e) {
     var duihuaSrc = e.target.dataset.monosrc
-    console.log(e)
-    console.log(this.data.yuanshiSrc)
     if (duihuaSrc != undefined) {
       myaudio.title = '测试'
       myaudio.src = duihuaSrc;
@@ -415,7 +452,6 @@ Page({
     }
   },
 
-
   onUnload: function () {
     n = 0;
     if (res.platform == 'ios') {
@@ -423,6 +459,12 @@ Page({
     } else {
       myaudio.destroy()
     }
+
+    SocketTask.close({
+      success: function (res) {
+        console.log(res)
+      }
+    })
   },
 
   // 分享功能

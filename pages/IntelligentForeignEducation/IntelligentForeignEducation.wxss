@@ -1,0 +1,140 @@
+/**index.wxss**/
+@import "../../utils/weui.wxss";
+page {
+  height: 100%;
+}
+
+.container {
+  /* height: 80%; */
+  min-height: 97.6%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 15rpx 15rpx;
+  background-color: #ffffff;
+}
+
+.chat-list {
+  flex: 1;
+  padding-bottom: 80rpx;
+}
+
+.scrool-view {
+  height: 91%
+}
+
+.chat-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20rpx;
+}
+
+.chat-left text {
+  flex: 1;
+  margin-left: 10rpx;
+  padding: 10rpx;
+  background-color: white;
+  border-radius: 11rpx;
+  word-break: break-all;
+}
+
+.chat-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+}
+
+.chat-right text {
+  margin-right: 10rpx;
+  padding:10rpx;
+  background-color: #CDB5CD;
+  border-radius: 11rpx;
+  word-break: break-all;
+  text-align: right;
+}
+
+.avatar-img {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 20rpx;
+}
+
+.text-video-img {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 60rpx;
+  margin-right: 5rpx;
+}
+
+.ask-input-word {
+  width: 300rpx;
+  position: fixed;
+  bottom: 54rpx;
+  left: 210rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.button-hover{
+  background-color:#CCCCCC;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.olami-info{
+  font-size: 10px;
+  align-items: right;
+}
+
+.speaker{ 
+    position: fixed; 
+    left: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 30%;
+    height: 20%;
+} 
+
+
+.tipsTitle{
+  width: 100%;
+  font-family: PingFang-SC-Regular;
+  font-size: 28rpx;
+  color: #666666;
+  letter-spacing: 1.4px;
+  text-align: center;
+  position: absolute;
+  margin: 50% auto;
+
+}
+
+.talkBtn{
+  display: block;
+  color: #333333;
+  overflow: hidden;
+}
+
+.talkimg{
+  display: block;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.anzhuBtn{
+  font-size: 36rpx;
+  color: rgba(51,51,51,1)
+}

@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="tipsTitle" hidden='{{ studyWhat }}'>想学什么，按住说说看</view>
+  <scroll-view class="scrool-view" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{scrolltop}}" enable-back-to-top="true">
+    <view class="chat-list">
+      <block wx:for="{{chatList}}" wx:key="time">
+        <view id="roll{{index + 1}}" class="chat-left" wx:if="{{item.orientation == 'l'}}">
+          <image class="avatar-img" src="../../images/kefuimg.png"></image>
+          <text bindtap='playvioce' data-vioceurl="{{ item.src }}">这是语音按钮</text>
+        </view>
+        <view id="roll{{index + 1}}" class="chat-right" wx:if="{{item.orientation == 'r'}}">
+          <text>{{item.text}}</text>
+          <image class="avatar-img" src="{{userLogoUrl}}"></image>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+
+    <view class="ask-input-word" hidden='{{ ChineseBtn }}'>
+      <view  bindtouchstart="touchdownChinese" bindtouchend="touchdownChinese" class="talkBtn"><image src="{{ talkBtn }}" class="talkimg"></image><text class="anzhuBtn">按住说中文</text></view>
+    </view>
+
+
+     <view class="ask-input-word" hidden='{{ EnglishBtn }}'>
+      <view  bindtouchstart="touchdownEnglish" bindtouchend="touchdownEnglish" class="talkBtn"><image src="{{ talkBtn }}" class="talkimg"></image><text class="anzhuBtn">按住跟读</text></view>
+    </view>
+</view>
+<image class="speaker" hidden="{{!isSpeaking}}" src="{{speakerUrl}}"></image>

@@ -5,7 +5,13 @@
     "pages/RenjiaoEnglish/RenjiaoEnglish",
     "pages/R-Units/R-Units",
     "pages/FollowTheWord/FollowTheWord",
-    "pages/ReadTheText/ReadTheText"
+    "pages/ReadTheText/ReadTheText",
+    "pages/courseTitle/coursetitle",
+    "pages/course/course",
+    "pages/IntelligentForeignEducation/IntelligentForeignEducation",
+    "pages/PrivateTutor/PrivateTutor",
+    "pages/PackageDetails/PackageDetails",
+    "pages/OrderInformation/OrderInformation"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,6 +27,12 @@
     "list": [
       {
         "pagePath": "pages/index/index",
+        "text": "外教",
+        "iconPath": "images/ForeignTeachers2.png",
+        "selectedIconPath": "images/ForeignTeachersPress2.png"
+      },
+      {
+        "pagePath": "pages/course/course",
         "text": "课程",
         "iconPath": "images/curriculum2.png",
         "selectedIconPath": "images/curriculumPress2.png"

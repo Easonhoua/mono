@@ -6,7 +6,7 @@
       <view class="imageBtn"> 
         <image src="{{ tempFilePaths }}" mode="aspecFill" class="imageBox"/>
         <image src="{{ item.src }}" class="realimage"/>  
-        <image src="../.. /images/RIght2.png" hidden='{{ item.rightIcon }}' class="rightIcon"></image>
+        <image src="../../images/RIght2.png" hidden='{{ item.rightIcon }}' class="rightIcon"></image>
         <image src="../../images/error2.png" hidden="{{ item.errorIcon }}" class="errorIcon"></image>
       </view>
       <view class="imageWord">{{item.name}}</view>

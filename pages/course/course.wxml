@@ -1,0 +1,32 @@
+<view class="page">
+  <!-- 轮播图 -->
+  <!-- <view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="item">
+        <swiper-item>
+          <image class="slide-image" src="{{item}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view> -->
+ <!-- 空格线 -->
+  <!-- <view class="page__bd">
+    <view class="weui-search-bar">
+    </view>
+  </view> -->
+
+  <!-- 文章列表面板 -->
+  <view class="page__bd page__bd_spacing">
+    <view class="kind-list">
+      <block wx:for="{{list}}" wx:key="id">
+      <navigator url="../RenjiaoEnglish/RenjiaoEnglish?val={{item.val}}&&lan={{item.classLanguage }}">
+        <view class="kind-list__item">
+            <view id="{{item.val}}" class="weui-flex kind-list__item-hd">
+              <image class="kind-list__img" src="{{ item.url }}"></image>
+            </view>
+          </view>
+      </navigator>
+      </block>
+    </view>
+  </view>
+</view>

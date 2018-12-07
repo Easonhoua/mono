@@ -1,0 +1,17 @@
+<view class="RenjiaoView">
+  <view class="RenjiaoTop">当前课程：{{ curClass }}</view>
+  <view class="RenjiaoBottom">
+    <view class="course-listR">
+        <block wx:for="{{list}}" wx:key="tid">
+        <navigator url="../R-Units/R-Units?tid={{ item.tid }}">
+        <view class="course-listR_item">
+            <view class="whichUnit">
+              <view class="unitView">{{ item.name }}</view>
+              <view class="unittitle">{{ item.title }} </view>
+            </view>                            
+          </view>
+        </navigator>
+        </block>
+      </view>
+  </view>
+</view>

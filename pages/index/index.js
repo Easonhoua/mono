@@ -1,9 +1,21 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const httpUrl = 'https://http.aismono.net'
+const Monohttps = app.globalData.Monohttps;
 var swiper = [
   "../../images/Advertising2.png",
+];
+
+var list = [
+  {
+    image: '../../images/PEPEnglish2.png',
+    open: false,
+    url: '../IntelligentForeignEducation/IntelligentForeignEducation?packageType=2'
+  }, {
+    image: '../../images/PEPEnglish2.png',
+    open: false,
+    url: '../PrivateTutor/PrivateTutor?packageType=1'
+  }
 ];
 
 
@@ -11,16 +23,14 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgUrls: swiper,
     // indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    list: [],
-    showModal:false
+    list: list,
+    showModal: false
   },
-
 
   hideModal: function () {
     this.setData({
@@ -32,26 +42,14 @@ Page({
     this.hideModal();
   },
 
-  goce:function(ev){
-    let evdata = ev.currentTarget.dataset
-    wx.navigateTo({
-      url: '../RenjiaoEnglish/RenjiaoEnglish?val=' + evdata.urlVal + '&lan=' + evdata.urlLan +'',
-    })
-  },
-
   onLoad: function () {
-    let that = this;
-    if (app.globalData.userInfo === null){
-      that.setData({
-        showModal: true
-      })
-    }
-    if (app.globalData.userInfo) {
+    if (app.globalData.userInfo == null) {
       this.setData({
+        showModal: true,
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse) {
+    } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -72,41 +70,10 @@ Page({
         }
       })
     }
-
-
-
-    var param = {
-      classLanguage: 3
-    }
-
-    var paramJson = {
-      body: param,
-      sys: "1",
-      sysVer: "html5",
-      token: "",
-      ver: "1.0"
-    }
-    wx.request({
-      url: httpUrl + '/mono-biz-app/educationMiniProgram/queryClassType',
-      method: 'post',
-      data: paramJson,
-      success:function(res){
-        let listData = res.data.body
-        that.setData({
-          list: listData
-        }) 
-      },
-      fail:function(fail){
-        console.log(fail)
-      }
-    })
-
-  
-    
-    
   },
-
-  getUserInfo: function (e) {
+  
+  getUserInfo: function(e) {
+    console.log(e)
     this.hideModal();
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -114,5 +81,4 @@ Page({
       hasUserInfo: true
     })
   }
-
 })

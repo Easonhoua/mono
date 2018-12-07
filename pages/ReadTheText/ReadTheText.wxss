@@ -65,17 +65,17 @@ page {
   background: rgba(204,204,204,0.25);
   border-radius: 5px;
   margin: 10rpx 0 0 0;
+  word-wrap:break-word;
 }
 .readPartbox{
   display: inline-block;
   padding: 15rpx 30rpx;
   background: rgba(204,204,204,0.25);
   border-radius: 5px;
-  /* margin: 10rpx 0 0 0; */
+  word-wrap:break-word;
 }
 .dancibox,.readPart{
   position: relative;
-
 }
 
 
@@ -137,3 +137,11 @@ page {
     height: 20%;
 } 
 
+.score{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20rpx;
+  background: #cccccc;
+  color: #ffffff;
+}

@@ -45,7 +45,6 @@ Page({
       sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res1) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        console.log(res1)
         let tempFilePaths = res1.tempFilePaths[0]
         var imgSrc = 'DataList[' + thisindex + '].src'
         var rightIcon = 'DataList[' + thisindex + '].rightIcon'
@@ -72,12 +71,16 @@ Page({
             }
           },
           fail:function(fail){
-            console.log(fail)
+            wx.showToast({
+              title: '网络异常！',
+            })
           }
         })
       },
       fail:function(fail){
-        console.log(fail)
+        wx.showToast({
+          title: '网络异常！',
+        })
       }
     })
   }

@@ -1,0 +1,90 @@
+.outview{
+  width: 710rpx;
+  height: 100%;
+  padding: 20rpx;
+}
+
+.topcontainer{
+  width: 710rpx;
+  height: 515rpx;
+  border-bottom: 1px solid #D8D8D8; 
+}
+.detailImg{
+  display: block;
+  width: 710rpx;
+  height: 320rpx;
+  border: 1px solid #ccc;
+}
+.titleTxt{
+  display: block;
+  margin-top: 20rpx;
+  font-family: PingFang-SC-Regular;
+  font-size: 38rpx;
+  color: #333333;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+.newprice{
+  display: block;
+  font-family: PingFang-SC-Regular;
+  font-size: 40rpx;
+  color: #FF6259;
+  letter-spacing: 0;
+  line-height: 70rpx;
+}
+.oldprice{
+  display: inline-block;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  color: #666666;
+  letter-spacing: 0;
+  float: left;
+}
+.totalsell{
+  display: inline-block;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  color: #666666;
+  letter-spacing: 0;
+  float: right;
+}
+
+.bottomcontainer{
+  width: 750rpx;
+  height: 300rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.kefuimg{
+  display: block;
+  width: 64rpx;
+  height: 64rpx;
+  position: absolute;
+  left: 60rpx;
+  bottom: 54rpx;
+}
+.kefutxt{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #333333;
+  letter-spacing: 0;
+  position: absolute;
+  left: 64rpx;
+  bottom: 18rpx;
+}
+.goumaiBtn{
+  width: 420rpx;
+  height: 108rpx;
+  background: #FF6259;
+  border-radius: 77px;
+  line-height: 108rpx;
+  text-align: center;
+  font-family: PingFang-SC-Regular;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  position: absolute;
+  right: 60rpx;
+  bottom: 20rpx;
+}

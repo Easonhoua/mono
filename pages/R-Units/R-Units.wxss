@@ -24,8 +24,9 @@
 .whichUnit{
   width: 750rpx;
   min-height: 66rpx;
-  line-height: 66rpx;
   display: flex;
+  align-items:center;
+  margin-top:20rpx;
 }
 
 .unitView{
@@ -43,6 +44,7 @@
 }
 
 .unittitle{
+  width:600rpx;
   font-family: PingFang-SC-Regular;
   font-size: 16px;
   color: #FF837B;
@@ -64,7 +66,7 @@
 }
 
 .txt{
-  width: 22%;
+  width: 23%;
   float: left;
   height: 80rpx;
   line-height: 80rpx;
