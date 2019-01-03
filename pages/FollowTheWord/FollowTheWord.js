@@ -1,5 +1,5 @@
 var app = getApp();
-const aismonohttps = app.globalData.Monohttps;
+const Monohttps = app.globalData.Monohttps;
 
 var app = getApp()
 Page({
@@ -53,14 +53,14 @@ Page({
           [imgSrc]: tempFilePaths,
         })
         wx.uploadFile({
-          url: aismonohttps +'/mono-biz-app/recognizer/aliyuncsImageTag.shtml',
+          url: Monohttps +'/mono-biz-app/recognizer/aliyuncsImageTag.shtml',
           formData: paramJson,
           filePath: tempFilePaths,
           name: 'file', 
           success(ret) {
             if (JSON.parse(ret.data).code == 0){
               _this.setData({
-                [errorIcon]:true,
+                [errorIcon]: true,
                 [rightIcon] : false
               })
             }else{

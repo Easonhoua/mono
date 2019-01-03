@@ -69,6 +69,7 @@ page {
 }
 .readPartbox{
   display: inline-block;
+  width: 650rpx;
   padding: 15rpx 30rpx;
   background: rgba(204,204,204,0.25);
   border-radius: 5px;

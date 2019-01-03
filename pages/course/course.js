@@ -21,17 +21,6 @@ Page({
     showModal:false
   },
 
-
-  hideModal: function () {
-    this.setData({
-      showModal: false
-    });
-  },
-
-  onCancel: function () {
-    this.hideModal();
-  },
-
   onLoad: function () {
     let that = this;
     if (app.globalData.userInfo === null){
@@ -69,7 +58,6 @@ Page({
     var param = {
       classLanguage: 3
     }
-
     var paramJson = {
       body: param,
       sys: "1",
@@ -82,7 +70,7 @@ Page({
       method: 'post',
       data: paramJson,
       success:function(res){
-        console.log(res)
+        // console.log(res)
         let listData = res.data.body
         that.setData({
           list: listData

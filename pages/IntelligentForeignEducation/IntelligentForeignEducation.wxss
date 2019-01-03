@@ -1,11 +1,10 @@
 /**index.wxss**/
-@import "../../utils/weui.wxss";
 page {
   height: 100%;
 }
 
 .container {
-  /* height: 80%; */
+  height: 80%;
   min-height: 97.6%;
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ page {
 }
 
 .scrool-view {
-  height: 91%
+  height: 85%
 }
 
 .chat-left {
@@ -30,15 +29,44 @@ page {
   margin-top: 20rpx;
 }
 
-.chat-left text {
-  flex: 1;
-  margin-left: 10rpx;
-  padding: 10rpx;
-  background-color: white;
-  border-radius: 11rpx;
-  word-break: break-all;
+.isayinforView{
+  position: relative;
+  padding-right: 30rpx; 
+  max-width:600rpx; 
 }
 
+.chat-left .chineseWord {
+  display: block;
+  margin-left: 30rpx;
+  padding: 10rpx 80rpx 10rpx 10rpx;
+  background: rgba(204,204,204,0.25);
+  word-break: break-all;
+  border-top-left-radius: 10rpx 10rpx;
+  border-top-right-radius: 20rpx 20rpx;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+
+.chat-left .EnglishWord {
+  display: block;
+  margin-left: 30rpx;
+  padding: 10rpx 80rpx 10rpx 10rpx;
+  background: rgba(204,204,204,0.25);
+  word-break: break-all;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20rpx 20rpx;
+  border-bottom-left-radius: 20rpx 20rpx;
+}
+.graysound{
+  position: absolute;
+  width: 24rpx;
+  height: 42rpx;
+  right: 60rpx;
+  bottom: 10rpx;
+}
 .chat-right {
   display: flex;
   align-items: center;
@@ -46,18 +74,59 @@ page {
   margin-top: 20rpx;
 }
 
-.chat-right text {
-  margin-right: 10rpx;
-  padding:10rpx;
-  background-color: #CDB5CD;
-  border-radius: 11rpx;
-  word-break: break-all;
-  text-align: right;
+.contentview{
+  max-width: 600rpx;
+  position: relative;
 }
 
+
+
+.rightIcon,.wrongIcon{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: -70rpx;
+  top: 20rpx;
+  /* display: none; */
+}
+
+.rightIcon{
+  width: 56rpx;
+  height: 40rpx;
+}
+  
+.whitesound{
+  display: block;
+  width: 28rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 54rpx;
+  top: 15rpx;
+}
+
+.chat-right .yinpinBtn {
+  margin-right: 30rpx;
+  width:128rpx;
+  height: 80rpx;
+  background-color: #32BBFF;
+  border-top-left-radius: 35rpx 35rpx;
+  border-top-right-radius:  10rpx;
+  border-bottom-right-radius: 35rpx 35rpx;
+  border-bottom-left-radius: 35rpx 35rpx;
+  word-break: break-all;
+  text-align: right;
+  color:  #1F1F1F;
+}
+
+.secondNum{
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  color: #ffffff;
+}
 .avatar-img {
-  width: 60rpx;
-  height: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 20rpx;
 }
 
@@ -69,15 +138,10 @@ page {
 }
 
 .ask-input-word {
-  width: 300rpx;
-  position: fixed;
-  bottom: 54rpx;
-  left: 210rpx;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  position:fixed;
+  left:50%;
+  bottom:3%;
+  margin-left:-50px;
 }
 
 
@@ -118,11 +182,14 @@ page {
   text-align: center;
   position: absolute;
   margin: 50% auto;
-
 }
 
 .talkBtn{
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* text-align: center; */
   color: #333333;
   overflow: hidden;
 }
@@ -137,4 +204,11 @@ page {
 .anzhuBtn{
   font-size: 36rpx;
   color: rgba(51,51,51,1)
+}
+.gobackImg{
+  position: fixed;
+  bottom: 100rpx;
+  left: 68rpx;
+  width: 58rpx;
+  height: 46rpx;
 }

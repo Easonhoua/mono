@@ -32,7 +32,7 @@
 .unitView{
   width: 150rpx;
   height: 50rpx;
-  line-height: 50rpx;
+  line-height: 48rpx;
   border: 1rpx solid #FF6259;
   border-radius: 10rpx;
   text-align: center;
@@ -40,7 +40,7 @@
   font-size: 34rpx;
   color: #FF6259;
   letter-spacing: 0;
-  margin:8rpx 0 0 26rpx;
+  margin:0 0 0 26rpx;
 }
 
 .unittitle{

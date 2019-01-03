@@ -42,9 +42,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "测试",
-					"pathName": "pages/test/test"
+					"pathName": "pages/IntelligentForeignEducation/IntelligentForeignEducation",
+					"query": ""
 				}
 			]
 		}

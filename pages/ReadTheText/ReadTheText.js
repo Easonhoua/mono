@@ -8,7 +8,6 @@ if (res.platform == 'ios') {
   var myaudio = wx.createInnerAudioContext();
 }
 var MD5 = require('../../utils/MD5.js');
-var WxParse = require('../wxParse/wxParse.js');
 const Monohttps = app.globalData.Monohttps;
 const websocketaddr = app.globalData.websocketaddr;
 var SocketTask;
@@ -32,6 +31,7 @@ Page({
     a: false,
     b: false,
     // score: ''
+    readPartreal:''
   },
 
   onLoad: function (e) {
@@ -84,15 +84,16 @@ Page({
       fail: function (fail) {
         wx.showToast({
           title: '网络异常！',
+          duration: 2000,
+          icon:'none'
         })
       }
     })
   },
 
-  onReady() {
+  onShow() {
     that = this;
     SocketTask.onOpen(res => {
-      // console.log('open了')
       socketOpen = true;
       var timestamp = new Date().getTime()
       var sig = MD5.md5('1543281970000043' + timestamp + '665309ac00d60d0c804caf8e9cf93c4e')
@@ -108,7 +109,15 @@ Page({
       that.webSocket()
       wx.showToast({
         title: '连接失败！',
+        duration: 2000,
+        icon:'none'
       })
+    })
+
+    SocketTask.close({
+      success: function (res) {
+        that.webSocket()
+      }
     })
 
 
@@ -118,15 +127,9 @@ Page({
         wx.showToast({
           title: '语音异常',
           duration: 2000,
+          icon:'none',
           mask: true
         })
-
-        SocketTask.close({
-          success: function (res) {
-            that.webSocket()
-          }
-        })
-       
       } else {
         // that.setData({
         //   score: useData.overall
@@ -216,11 +219,12 @@ Page({
       fail: function (err) {
         wx.showToast({
           title: '网络异常！',
+          duration: 2000,
+          icon:'none'
         })
       },
     })
   },
-
 
   sendSocketMessage(msg) {
     var that = this;
@@ -232,6 +236,8 @@ Page({
       fail: function (fail) {
         wx.showToast({
           title: '信息发送失败！',
+          duration: 2000,
+          icon:'none'
         })
       }
     })
@@ -264,6 +270,8 @@ Page({
       console.log(res)
       wx.showToast({
         title: '网络异常！',
+        duration: 2000,
+        icon:'none'
       })
     });
   },
@@ -300,11 +308,8 @@ Page({
           that.sendSocketMessage('{"cmd":"stop"}')
         }
       })
-
     });
-
   },
-
 
 
   //获取单词数据
@@ -411,12 +416,12 @@ Page({
               that.ObtainData();
             }
           } else if (readPart != undefined) {
-            var readPartreal = res.data.body.readPart.replace('[', '<strong>').replace(']', '</strong>').replace(/@/g, '<br/><br/>')
-            var readParttrue = WxParse.wxParse('readParttxt', 'html', readPartreal, that, 0);
+            var readPartreal = res.data.body.readPart.replace(/\[/g, '<strong>').replace(/\]/g, '</strong>').replace(/@/g, '<br/><br/>')
             that.setData({
               toptitle: titlecontent,
               onlyText: readPart,
-              yuanshiSrc: readpartSrc
+              yuanshiSrc: readpartSrc,
+              readPartreal: readPartreal
             })
             //延时一秒自动播放音频
             setTimeout(function () {
@@ -430,13 +435,13 @@ Page({
         fail: function (fail) {
           wx.showToast({
             title: '网络异常！',
+            duration: 2000,
+            icon:'none'
           })
         }
       })
     }
   },
-
-
 
   //播放原始语音
   monoyuyin(e) {

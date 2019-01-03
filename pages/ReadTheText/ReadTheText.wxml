@@ -1,4 +1,4 @@
-<import src="../wxParse/wxParse.wxml"/>
+
 <view class="readPagecontainer">
   <view class="readPageTop">{{ toptitle }}</view>
   <view class="readpagebottom">
@@ -10,7 +10,9 @@
         </view>
 
       <view class="readPart" wx:else="{{ b }}">
-        <view class="readPartbox"><template is="wxParse" data="{{wxParseData:readParttxt.nodes}}"/></view> 
+        <view class="readPartbox">
+          <rich-text nodes="{{readPartreal}}" ></rich-text>
+        </view> 
           <image class="readPartbofangBtn" src = '../../images/paly2.png'  bindtap="monoyuyin"></image>
           <image class="readPartrightplay" hidden='{{ Brightplay }}' src = "../../images/RIght2.png" bindtap='mineluyin'></image>
           <image class="readPartwrongplay" hidden='{{ Bwrongplay }}' src="../../images/error2.png" bindtap='mineluyin'></image>

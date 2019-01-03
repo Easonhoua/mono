@@ -44,5 +44,10 @@
         "selectedIconPath": "images/MinePress2.png"
       }
     ]
+  },
+  "networkTimeout":{
+    "request": 60000,
+    "connectSocket": 60000,
+    "uploadFile": 6000
   }
 }

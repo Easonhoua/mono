@@ -3,7 +3,7 @@ var app = getApp();
 var that;
 const Monohttps = app.globalData.Monohttps;
 var swiper = [
-  "../../images/Advertising2.png",
+  "../../images/sirenTeacher.png",
 ];
 Page({
 
@@ -39,7 +39,7 @@ Page({
       method: 'post',
       data: paramJson,
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         let resData = res.data.body
         that.setData({
           Listofpackages: resData

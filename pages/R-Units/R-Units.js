@@ -16,32 +16,31 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-
     var optData1 = wx.getStorageSync('val')
-    if (optData1 = '0') {
+    if (optData1 == '0') {
       wx.setNavigationBarTitle({
         title: '英语派课文'
       })
-    } else if (optData1 = '1') {
+    } else if (optData1 == '1') {
       wx.setNavigationBarTitle({
         title: '人教版课文'
       })
-    } else if (optData1 = '2') {
+    } else if (optData1 == '2') {
       wx.setNavigationBarTitle({
         title: '加州小学课文'
       })
-    } else if (optData1 = '3') {
+    } else if (optData1 == '3') {
       wx.setNavigationBarTitle({
         title: '牛津小学课文'
       })
-    } else if (optData1 = '4') {
+    } else if (optData1 == '4') {
       wx.setNavigationBarTitle({
         title: '研究社课文'
       })
     }
 
     let tid = options.tid
-    let whichclass = wx.getStorageSync('whichclass')
+    let whichclass = decodeURIComponent(wx.getStorageSync('whichclass'))
     that.setData({
       curClass: whichclass
     })
@@ -61,7 +60,7 @@ Page({
       method: 'post',
       data: paramJson,
       success: function (res) {
-        // console.log(res)
+        console.log(res)
         let listData = res.data.body
         that.setData({
           list: listData,
