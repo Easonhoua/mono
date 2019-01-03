@@ -33,7 +33,7 @@
   width: 150rpx;
   height: 50rpx;
   line-height: 48rpx;
-  border: 1rpx solid #FF6259;
+  border: 2rpx solid #FF6259;
   border-radius: 10rpx;
   text-align: center;
   font-family: PingFangSC-Regular;

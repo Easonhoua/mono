@@ -66,6 +66,7 @@ page {
   border-radius: 5px;
   margin: 10rpx 0 0 0;
   word-wrap:break-word;
+  font-size: 40rpx; 
 }
 .readPartbox{
   display: inline-block;
@@ -74,6 +75,7 @@ page {
   background: rgba(204,204,204,0.25);
   border-radius: 5px;
   word-wrap:break-word;
+  font-size: 40rpx;
 }
 .dancibox,.readPart{
   position: relative;

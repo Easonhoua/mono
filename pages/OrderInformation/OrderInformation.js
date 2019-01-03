@@ -7,5 +7,8 @@ Page({
   },
   onLoad: function () {
    
+  },
+  onShareAppMessage() {
+
   }
 })

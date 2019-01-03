@@ -22,14 +22,15 @@ var list = [
 
 Page({
   data: {
-    userInfo: {},
+    // userInfo: {},
     imgUrls: swiper,
     // indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
     list: list,
-    showModal: false
+    showModal: false,
+    openid:''
   },
 
   hideModal: function () {
@@ -39,58 +40,102 @@ Page({
   },
 
   onCancel: function () {
+    wx.showToast({
+      title: "小程序功能不能用哦！",
+      image:'../../images/error2.png',
+      duration:3000,
+      mask:'true'
+    });
     this.hideModal();
   },
 
   onLoad: function () {
     that = this;
-    setTimeout(function(){
-      if (app.globalData.userInfo == null) {
+    app.getLogin().then(function(ret){
+      // console.log(ret)
+
+      if (ret.data.code == 9002){
         that.setData({
-          showModal: true,
-          userInfo: app.globalData.userInfo,
+           showModal: true,
+           openid: ret.data.body.openid
+         })
+      } else if (ret.data.code == 9000){
+        wx.showToast({
+          title: "网络错误",
+          icon: 'none'
+        });
+      } else if (ret.data.code == 9005){
+        wx.showToast({
+          title: "参数不能为空",
+          icon: 'none'
+        });
+      } else if (ret.data.code == 9008){
+        wx.showToast({
+          title: "没有权限",
+          icon: 'none'
+        });
+      } else if (ret.data.code == 8000){
+        wx.setStorage({
+          key: 'avatarUrl',
+          data: ret.data.body.avatarUrl,
         })
-      }  else {
-        that.setData({
-          showModal: false,
+        wx.setStorage({
+          key: 'nickName',
+          data: ret.data.body.nickName,
+        })
+        wx.setStorage({
+          key: 'monoid',
+          data: ret.data.body.monoid,
         })
       }
-    },1000)
+    })
   },
   
   getUserInfo: function(e) {
     this.hideModal();
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-    })
+    if (e.detail.userInfo == undefined){
+      this.setData({
+        showModal: true
+      });
+    }else{
+      wx.setStorage({
+        key: 'avatarUrl',
+        data: e.detail.userInfo.avatarUrl,
+      })
+      wx.setStorage({
+        key: 'nickName',
+        data: e.detail.userInfo.nickName,
+      })
 
-    // var jsonParam ={
-    //   openid: app.globalData.openid,
-    //   rawData: e.detail.rawData,
-    //   signature: e.detail.signature,
-    //   encrypteData: e.detail.encryptedData,
-    //   iv: e.detail.iv
-    // }
+      var jsonParam = {
+        openid: this.data.openid,
+        rawData: e.detail.rawData,
+        signature: e.detail.signature,
+        encrypteData: e.detail.encryptedData,
+        iv: e.detail.iv
+      }
 
-    // var realjson = {
-    //   body: jsonParam,
-    //   sys: "1",
-    //   sysVer: "html5",
-    //   token: "",
-    //   ver: "1.0"
-    // }
+      var realjson = {
+        body: jsonParam,
+        sys: "1",
+        sysVer: "html5",
+        token: "",
+        ver: "1.0"
+      }
+      wx.request({
+        url: Monohttps + '/mono-biz-app/miniProgram/loginRegister',
+        method: 'post',
+        data: realjson,
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (fail) {
+          console.log(fail)
+        }
+      })
+    }
+  },
+  onShareAppMessage() {
 
-    // wx.request({
-    //   url: Monohttps + '/mono-biz-app/miniProgram/loginRegister',
-    //   method:'post',
-    //   data: realjson,
-    //   success:function(res){
-    //     console.log(res)
-    //   },
-    //   fail:function(fail){
-    //     console.log(fail)
-    //   }
-    // })
-  }
+  } 
 })

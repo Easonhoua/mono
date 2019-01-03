@@ -1,7 +1,7 @@
 var app = getApp();
 var that;
 var chatListData = [];
-const recorderManager = wx.getRecorderManager()
+const recorderManager = wx.getRecorderManager();
 var res = wx.getSystemInfoSync();
 if (res.platform == 'ios') {
   var myaudio = wx.getBackgroundAudioManager();
@@ -9,13 +9,12 @@ if (res.platform == 'ios') {
   var myaudio = wx.createInnerAudioContext();
 }
 const Monohttps = app.globalData.Monohttps;
-const websocketaddr = app.globalData.websocketaddr;
 var MD5 = require('../../utils/MD5.js');
 const tokenhttps = 'https://openapi.baidu.com/oauth/2.0/token?'
 const tsn = 'http://tsn.baidu.com/text2audio?'
-var SocketTask;
-var socketOpen = false;
 var a = 0;
+var iTime;
+
 Page({
   data: {
     userInfo: {},
@@ -34,111 +33,81 @@ Page({
     startTime:'',
     stopTime:'',
     second:'',
-    viewWidth: ''
+    viewWidth: '',
+    showModal: false,
+  },
+
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
   },
 
   onLoad: function (options) {
     that = this;
-    if (!socketOpen) {
-      that.webSocket()
+    var avatarUrl = wx.getStorageSync('avatarUrl')
+    if (avatarUrl){
+      that.setData({
+        userLogoUrl: avatarUrl
+      })
+    }else{
+      that.setData({
+        showModal: true
+      });
     }
-    var userInfo = app.globalData.userInfo  
-    that.setData({
-      userLogoUrl: userInfo.avatarUrl
-    })
   },
 
   onShow() {
     that = this;
-    SocketTask.onOpen(res => {
-      socketOpen = true;
-      var timestamp = new Date().getTime()
-      var sig = MD5.md5('1543281970000043' + timestamp + '665309ac00d60d0c804caf8e9cf93c4e')
-      var jsonData1 = '{"app":{"applicationId":"1543281970000043", "sig": "' + sig + '","alg": "md5","timestamp":"' + timestamp + '", "userId": "mono100669"}}'
-      that.sendSocketMessage(jsonData1)//验证用户信息
-    })
-
-    SocketTask.onClose(onClose => {
-      socketOpen = false;
-    })
-    SocketTask.onError(onError => {
-      socketOpen = false;
-      wx.hideLoading()
-      that.webSocket()
-      wx.showToast({
-        title: '连接失败！',
-      }) 
-    })
-
-    SocketTask.onMessage(onMessage => {
+    wx.onSocketMessage(function (onMessage) {
       wx.hideLoading()
       var useData = JSON.parse(onMessage.data).result
       if (useData == undefined) {
         wx.showToast({
           title: '语音异常',
           duration: 2000,
-          mask: true
-        })
-        SocketTask.close({
-          success: function (res) {
-            that.webSocket()
-          }
+          icon: 'none'
         })
       } else {
-        if (useData.overall >= 80) {
-          that.addChat(that.data.filePath, "r", false, true, that.data.viewWidth, that.data.second)
-          that.setData({
-            ChineseBtn: false,
-            EnglishBtn: true,
-            gobackBtn : true
-          })
-          setTimeout(function(){
-            myaudio.title = '兼容ios的title'
-            myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-ROyAWhBfAAAvanH_WC0883.mp3";
-            myaudio.play();
-          },500)
-        } else if (useData.overall < 80) {
-          that.addChat(that.data.filePath, "r", true, false, that.data.viewWidth, that.data.second)
-          setTimeout(function(){
-            myaudio.title = '兼容ios的title'
-            myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
-            myaudio.play();
-          },500)
-        }
+        //写在事件内部
+        clearTimeout(iTime);
+        iTime = setTimeout(function () {
+          //需要执行的事件
+          if (useData.overall >= 75) {
+            that.addChat(that.data.filePath, "r", false, true, that.data.viewWidth, that.data.second, false, true)
+            that.setData({
+              ChineseBtn: false,
+              EnglishBtn: true,
+              gobackBtn: true
+            })
+            setTimeout(function () {
+              myaudio.title = '兼容ios的title'
+              myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-ROyAWhBfAAAvanH_WC0883.mp3";
+              myaudio.play();
+            }, 500)
+          } else if (useData.overall < 75) {
+            that.addChat(that.data.filePath, "r", true, false, that.data.viewWidth, that.data.second, true, false)
+            setTimeout(function () {
+              myaudio.title = '兼容ios的title'
+              myaudio.src = "https://dfs.aismono.net/group2/M00/00/22/rBK-w1v-RPKAXr3UAAAKrzF7Kfs186.mp3";
+              myaudio.play();
+            }, 500)
+          }
+        }, 100);
       }
-    })
-  },
-
-  webSocket: function () {
-    // 创建Socket
-    SocketTask = wx.connectSocket({
-      url: websocketaddr + '/ws?e=0&t=0&version=2',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: function (res) {
-        console.log('WebSocket连接创建', res)
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '网络异常！',
-        })
-      },
     })
   },
 
   sendSocketMessage(msg) {
     var that = this;
-    SocketTask.send({
+    wx.sendSocketMessage({
       data: msg,
       success: function (res) {
         console.log('已发送', res)
       },
       fail: function (fail) {
-        wx.showToast({
-          title: '信息发送失败！',
-        })
+        wx.hideLoading();
+        console.log(fail)
       }
     })
   },
@@ -166,6 +135,9 @@ Page({
       })
     })
     recorderManager.onError(()=>{
+      that.setData({
+        isSpeaking: false,
+      })
       console.log('error')
     })
   },
@@ -187,9 +159,9 @@ Page({
       var secondTime = Math.ceil((new Date().getTime() - that.data.startTime) / 1000)
       if (secondTime > 5) {
         var viewWidth = (secondTime - 5) * 6.5 + 128
-        that.addChat(tempFilePaths, "r", true, true, viewWidth+'rpx', secondTime)
+        that.addChat(tempFilePaths, "r", true, true, viewWidth+'rpx', secondTime,true,true)
       }else{
-        that.addChat(tempFilePaths, "r", true, true, '128rpx', secondTime)
+        that.addChat(tempFilePaths, "r", true, true, '128rpx', secondTime,true,true)
       }
       wx.uploadFile({
         url: Monohttps + '/mono-biz-app/recognizer/voiceSemantic.shtml',
@@ -197,29 +169,40 @@ Page({
         name: 'file',
         success(ret) {
           wx.hideLoading()
-          console.log(ret)
           var chineseword = JSON.parse(ret.data)
-          if (chineseword.data != ''){
-            that.addChat(chineseword, "l", true, true)
-            that.baidurequest(chineseword)
-            that.setData({
-              ChineseBtn: true,
-              EnglishBtn: false,
-              chineseword: chineseword,
-              gobackBtn: false,
-              second: secondTime,
-            })
-          }else{
+          if (chineseword.code == 1 || chineseword.data == '' || chineseword.data == ''){
             wx.showToast({
               title: 'mono没听清，请重录。',
               icon: 'none',
+              duration: 2000
             })
+          }else{
+            var pattern2 = new RegExp("[A-Za-z]+");
+            var str2 = chineseword.data
+            if (pattern2.test(str2)) {
+              wx.showToast({
+                title: '请说中文。',
+                icon: 'none',
+                duration: 2000
+              })
+            }else{
+              that.addChat(chineseword, "l", true, true)
+              that.baidurequest(chineseword)
+              that.setData({
+                ChineseBtn: true,
+                EnglishBtn: false,
+                chineseword: chineseword,
+                gobackBtn: false,
+                second: secondTime,
+              })
+            }
           }
         },
         fail: function (fail) {
           wx.showToast({
             title: '网络异常！',
-            icon:'none'
+            icon:'none',
+            duration: 2000
           })
         }
       })
@@ -248,6 +231,9 @@ Page({
       })
     })
     recorderManager.onError(() => {
+      that.setData({
+        isSpeaking: false,
+      })
       console.log('error')
     })
   },
@@ -278,7 +264,12 @@ Page({
       })
       var wordtxt = that.data.chineseword.dataEn
       var timestamp = new Date().getTime()
-      var jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.sent.score","rank": 100,"refText": "' + wordtxt + '","userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      var jsonData2;
+      if (wordtxt.indexOf(" ") == -1) {
+        jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.word.score","rank": 100,"refText": "' + wordtxt + '","userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      } else {
+        jsonData2 = '{"tokenId":"' + MD5.md5(timestamp) + '", "request": { "attachAudioUrl": 1,"coreType": "en.sent.score","rank": 100,"refText": "' + wordtxt + '","userId": "mono100669"},"audio": { "audioType": "mp3", "channel": 1, "sampleBytes": 2, "sampleRate": 16000}}';
+      }
       that.sendSocketMessage(jsonData2)
       var filePath = res.tempFilePath
       var FileSystemManager = wx.getFileSystemManager();
@@ -298,9 +289,14 @@ Page({
     wx.request({
       url: tokenhttps +'grant_type=client_credentials&client_id=S0uoANfKnvmH0qiVahBRm84i&client_secret=R11Y4xxLoM9Sl6nO67O3uYTAo8TXA95E',
       success:function(res){
+        var acctkoen = res.data.access_token
         that.setData({
-          token: res.data.access_token
+          token: acctkoen
         })
+        var myaudioword = encodeURIComponent(encodeURIComponent(word.dataEn))
+        myaudio.title = "兼容ios"
+        myaudio.src = tsn + 'lan=zh&ctp=1&cuid=50-9A-4C-0F-ED-08&tok=' + acctkoen + '&tex=' + myaudioword + '&vol=15&per=4&spd=4&pit=2&aue=3'
+        myaudio.play()
       }
     })
   },
@@ -326,19 +322,18 @@ Page({
     var myaudioword = encodeURIComponent(encodeURIComponent(e.target.dataset.enword))
     var acctkoen = this.data.token
     myaudio.title = "兼容ios"
-    myaudio.src = tsn + 'lan=zh&ctp=1&cuid=50-9A-4C-0F-ED-08&tok=' + acctkoen +'&tex=' + myaudioword +'&vol=5&per=4&spd=5&pit=5&aue=3'
+    myaudio.src = tsn + 'lan=zh&ctp=1&cuid=50-9A-4C-0F-ED-08&tok=' + acctkoen +'&tex=' + myaudioword +'&vol=15&per=4&spd=4&pit=5&aue=3'
     myaudio.play()
   },
 
   // 增加对话到显示界面（scrolltopFlag为True）
-  addChat: function (word, orientation, rightIcon, wrongIcon, viewWidth, secondTime) {
-    that.addChatWithFlag(word, orientation, rightIcon, wrongIcon, viewWidth, secondTime,true);
+  addChat: function (word, orientation, rightIcon, wrongIcon, viewWidth, secondTime, righttxt, wrongtxt) {
+    that.addChatWithFlag(word, orientation, rightIcon, wrongIcon, viewWidth, secondTime, righttxt,wrongtxt,true);
   },
   // 增加对话到显示界面（scrolltopFlag为是否滚动标志）
-  addChatWithFlag: function (filePath, orientation, rightIcon, wrongIcon, viewWidth, secondTime,scrolltopFlag) {
-    let ch = { 'src': filePath, 'time': new Date().getTime(), 'orientation': orientation, 'rightIcon': rightIcon, 'wrongIcon': wrongIcon, 'viewWidth': viewWidth, 'secondTime': secondTime };
+  addChatWithFlag: function (filePath, orientation, rightIcon, wrongIcon, viewWidth, secondTime, righttxt, wrongtxt,scrolltopFlag) {
+    let ch = { 'src': filePath, 'time': new Date().getTime(), 'orientation': orientation, 'rightIcon': rightIcon, 'wrongIcon': wrongIcon, 'viewWidth': viewWidth, 'secondTime': secondTime, 'righttxt': righttxt, 'wrongtxt': wrongtxt };
     chatListData.push(ch);
-    // console.log(chatListData)
     var charlenght = chatListData.length;
     if (scrolltopFlag) {
       that.setData({
@@ -358,11 +353,6 @@ Page({
     } else {
       myaudio.destroy()
     }
-    SocketTask.close({
-      success: function (res) {
-        console.log(res)
-      }
-    })
     chatListData = [];
   },
 
@@ -377,20 +367,14 @@ Page({
       });
     }, 300);
   },
-
-
+  getUserInfo: function (e) {
+    this.hideModal();
+    this.setData({
+      userLogoUrl: e.detail.userInfo.avatarUrl,
+    })
+  },
   // // 分享功能
-  // onShareAppMessage: function (res) {
-  //   return {
-  //     desc: '和Mono一起漂流吧',
-  //     path: '../IntelligentForeignEducation/IntelligentForeignEducation',
-  //     imageUrl: '../../image/curriculumPress2.png',
-  //     success: function (res) {
-  //       console.log("[Console log]:" + res.errMsg);
-  //     },
-  //     fail: function (res) {
-  //       console.log("[Console log]:" + res.errMsg);
-  //     }
-  //   }
-  // },
+  onShareAppMessage: function () {
+
+  },
 })

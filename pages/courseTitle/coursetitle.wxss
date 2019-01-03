@@ -24,7 +24,6 @@
   min-height: 100rpx;
   display: flex;
   margin-top:20rpx;
-
 }
 
 .unitView{
@@ -49,5 +48,4 @@
   letter-spacing: 1px;
   margin-left:20rpx;
   line-height:66rpx;
-
 }

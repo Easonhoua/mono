@@ -6,19 +6,39 @@
 .course-listR_item{
   width: 222rpx;
   height: 120rpx;
-  background: rgba(204,204,204,0.25);
   border-radius: 15rpx; 
   text-align: center;
   line-height: 120rpx;
   margin: 20rpx 0 0 20rpx;
   font-family: PingFangSC-Regular;
   font-size: 32rpx;
-  color: #999999;
   float: left;
 }
 
-.course-listR_item-active{
-  font-family: PingFangSC-Medium;
-  background: rgba(50,187,255,0.08);
-  color: #32BBFF;
+.course-listR_item_yingyupai{
+  background: #f97e5d;
+  color: #ffffff;
+}
+
+.course-listR_item_renjiao{
+  background: #83d4fc;
+  color: #ffffff;
+}
+
+.course-listR_item_jiazhou{
+  background: #97c75f;
+  color: #ffffff;
+}
+
+.course-listR_item_niujin{
+  background: #f9c45d;
+  color: #ffffff;
+}
+.course-listR_item_waiyan{
+  background: #faaa9d;
+  color: #ffffff;
+}
+.course-listR_item_langwen{
+  background: #c499f9;
+  color: #ffffff;
 }

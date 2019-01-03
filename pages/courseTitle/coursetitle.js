@@ -36,9 +36,14 @@ Page({
       })
     } else if (optData1 == '4') {
       wx.setNavigationBarTitle({
-        title: '研究社单元'
+        title: '外研社单元'
+      })
+    } else if (optData1 == '5'){
+      wx.setNavigationBarTitle({
+        title: '香港朗文单元'
       })
     }
+
 
     let tid = options.tid
     let whichclass = decodeURIComponent(options.whichclass)

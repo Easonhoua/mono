@@ -4,6 +4,7 @@ const Monohttps = app.globalData.Monohttps
 Page({
   data: {
     list: [],
+    whichclass:''
   },
 
   /**
@@ -17,23 +18,45 @@ Page({
     wx.setStorageSync('lan', optData2)
     if (optData1 == '0'){
       wx.setNavigationBarTitle({
-        title: '英语派分册'
+        title: '英语派分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_yingyupai'
       })
     } else if (optData1 == '1'){
       wx.setNavigationBarTitle({
-        title: '人教版分册'
+        title: '人教版分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_renjiao'
       })
     } else if (optData1 == '2'){
       wx.setNavigationBarTitle({
-        title: '加州小学分册'
+        title: '加州小学分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_jiazhou'
       })
     } else if (optData1 == '3'){
       wx.setNavigationBarTitle({
-        title: '牛津小学分册'
+        title: '牛津小学分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_niujin'
       })
     } else if (optData1 == '4'){
       wx.setNavigationBarTitle({
-        title: '研究社分册'
+        title: '外研社分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_waiyan'
+      })
+    } else if (optData1 == '5'){
+      wx.setNavigationBarTitle({
+        title: '香港朗文分册',
+      })
+      that.setData({
+        whichclass: 'course-listR_item_langwen'
       })
     }
     
@@ -48,7 +71,6 @@ Page({
       token: "",
       ver: "1.0"
     }
-    console.log(param)
     wx.request({
       url: Monohttps +'/mono-biz-app/educationMiniProgram/queryClassVolume',
       method: 'post',
@@ -64,5 +86,7 @@ Page({
       }
     })
   },
+  onShareAppMessage() {
 
+  }
 })

@@ -9,9 +9,6 @@ if (res.platform == 'ios') {
 }
 var MD5 = require('../../utils/MD5.js');
 const Monohttps = app.globalData.Monohttps;
-const websocketaddr = app.globalData.websocketaddr;
-var SocketTask;
-var socketOpen = false;
 var n = 0;
 var a = 0;
 Page({
@@ -31,15 +28,16 @@ Page({
     a: false,
     b: false,
     // score: ''
-    readPartreal:''
+    readPartreal:'',
+    option: ''
   },
 
   onLoad: function (e) {
     that = this
-    if (!socketOpen) {
-      that.webSocket()
-    }
     var tid = e.tid
+    that.setData({
+      option: e
+    })
     var param = {
       tid: tid
     }
@@ -64,15 +62,13 @@ Page({
             a: true,
             b: false
           })
-        }
-        if (dialogues) {
+        }else if (dialogues) {
           that.setData({
             dialoguesarr: dialogues,
             a: true,
             b: false
           })
-        }
-        if (readParts) {
+        }else if (readParts) {
           that.setData({
             readPartsarr: readParts,
             a: false,
@@ -82,46 +78,20 @@ Page({
         that.ObtainData();
       },
       fail: function (fail) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000,
-          icon:'none'
-        })
+        console.log(fail)
+        // wx.showToast({
+        //   title: '网络异常！',
+        //   duration: 2000,
+        //   icon:'none'
+        // })
       }
     })
   },
 
   onShow() {
     that = this;
-    SocketTask.onOpen(res => {
-      socketOpen = true;
-      var timestamp = new Date().getTime()
-      var sig = MD5.md5('1543281970000043' + timestamp + '665309ac00d60d0c804caf8e9cf93c4e')
-      var jsonData1 = '{"app":{"applicationId":"1543281970000043", "sig": "' + sig + '","alg": "md5","timestamp":"' + timestamp + '", "userId": "mono100669"}}'
-      that.sendSocketMessage(jsonData1)//验证用户信息
-    })
-
-    SocketTask.onClose(onClose => {
-      socketOpen = false;
-    })
-    SocketTask.onError(onError => {
-      socketOpen = false;
-      that.webSocket()
-      wx.showToast({
-        title: '连接失败！',
-        duration: 2000,
-        icon:'none'
-      })
-    })
-
-    SocketTask.close({
-      success: function (res) {
-        that.webSocket()
-      }
-    })
-
-
-    SocketTask.onMessage(onMessage => {
+    wx.onSocketMessage(function (onMessage) {
+      wx.hideLoading();
       var useData = JSON.parse(onMessage.data).result
       if (useData == undefined) {
         wx.showToast({
@@ -205,35 +175,16 @@ Page({
     })
   },
 
-  webSocket: function () {
-    // 创建Socket
-    SocketTask = wx.connectSocket({
-      url: websocketaddr + '/ws?e=0&t=0&version=2',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: function (res) {
-        console.log('WebSocket连接创建', res)
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000,
-          icon:'none'
-        })
-      },
-    })
-  },
-
   sendSocketMessage(msg) {
     var that = this;
-    SocketTask.send({
+    wx.sendSocketMessage({
       data: msg,
       success: function (res) {
         console.log('已发送', res)
       },
       fail: function (fail) {
+        console.log(fail)
+        wx.hideLoading();
         wx.showToast({
           title: '信息发送失败！',
           duration: 2000,
@@ -242,7 +193,6 @@ Page({
       }
     })
   },
-
 
   // 按钮按下
   touchdown: function () {
@@ -263,16 +213,16 @@ Page({
     }
     recorderManager.start(options);
     recorderManager.onStart(() => {
-      
+      // console.log('开始')
     });
 
     recorderManager.onError((res) => {
       console.log(res)
-      wx.showToast({
-        title: '网络异常！',
-        duration: 2000,
-        icon:'none'
-      })
+      // wx.showToast({
+      //   title: '网络异常！',
+      //   duration: 2000,
+      //   icon:'none'
+      // })
     });
   },
 
@@ -285,7 +235,9 @@ Page({
       isSpeaking: false,
       speakerUrl: '../../images/speaker0.png',
     })
-
+    wx.showLoading({
+      title: '数据加载中...',
+    })
     clearInterval(that.speakerInterval);
     recorderManager.onStop(function (res) {
       var wordtxt = that.data.onlyText
@@ -341,7 +293,7 @@ Page({
           if (res.confirm) {
             wx.navigateBack()
           } else if (res.cancel) {
-            console.log('用户点击取消')
+            that.onLoad(that.data.option)
           }
         }
       })
@@ -433,11 +385,12 @@ Page({
           }
         },
         fail: function (fail) {
-          wx.showToast({
-            title: '网络异常！',
-            duration: 2000,
-            icon:'none'
-          })
+          console.log('lalal')
+          // wx.showToast({
+          //   title: '网络异常！',
+          //   duration: 2000,
+          //   icon:'none'
+          // })
         }
       })
     }
@@ -464,27 +417,11 @@ Page({
     } else {
       myaudio.destroy()
     }
-
-    SocketTask.close({
-      success: function (res) {
-        console.log(res)
-      }
-    })
   },
 
   // 分享功能
-  onShareAppMessage: function (res) {
-    return {
-      desc: '魔脑陪读-跟读课文',
-      path: 'pages/ReadTheText/ReadTheText',
-      imageUrl: '../../images/CaliforniaEnglish2.png',
-      success: function (res) {
-        console.log("[Console log]:" + res.errMsg);
-      },
-      fail: function (res) {
-        console.log("[Console log]:" + res.errMsg);
-      }
-    }
+  onShareAppMessage: function () {
+    
   },
 
   speaking: function () {

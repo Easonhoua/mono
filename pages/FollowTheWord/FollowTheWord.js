@@ -1,7 +1,5 @@
 var app = getApp();
 const Monohttps = app.globalData.Monohttps;
-
-var app = getApp()
 Page({
   data: {
     DataList :[],
@@ -71,18 +69,23 @@ Page({
             }
           },
           fail:function(fail){
-            wx.showToast({
-              title: '网络异常！',
-            })
+            console.log(fail)
+            // wx.showToast({
+            //   title: '网络异常！',
+            // })
           }
         })
       },
       fail:function(fail){
-        wx.showToast({
-          title: '网络异常！',
-        })
+        console.log(fail)
+        // wx.showToast({
+        //   title: '网络异常！',
+        // })
       }
     })
+  },
+  onShareAppMessage() {
+
   }
 })
 

@@ -3,17 +3,10 @@ var app = getApp()
 const Monohttps = app.globalData.Monohttps;
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     curClass:'',
     list: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     let that = this
     var optData1 = wx.getStorageSync('val')
@@ -35,9 +28,14 @@ Page({
       })
     } else if (optData1 == '4') {
       wx.setNavigationBarTitle({
-        title: '研究社课文'
+        title: '外研社课文'
+      })
+    } else if (optData1 == '5'){
+      wx.setNavigationBarTitle({
+        title: '香港朗文课文'
       })
     }
+
 
     let tid = options.tid
     let whichclass = decodeURIComponent(wx.getStorageSync('whichclass'))
@@ -60,7 +58,6 @@ Page({
       method: 'post',
       data: paramJson,
       success: function (res) {
-        console.log(res)
         let listData = res.data.body
         that.setData({
           list: listData,

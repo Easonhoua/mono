@@ -2,7 +2,7 @@
     <view class="course-listR">
       <block wx:for="{{list}}" wx:key="id">
       <navigator url="../courseTitle/coursetitle?tid={{ item.tid }}&whichclass={{ item.name}}">
-        <view class="course-listR_item {{ item.active }}">
+        <view class="course-listR_item {{ whichclass}}">
                 <view class="itemView ">
                   <text>{{ item.name }}</text>
                 </view>
