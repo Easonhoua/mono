@@ -33,18 +33,36 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
-					"name": "加州",
-					"pathName": "pages/CaliforniaEnglish/CaliforniaEnglish",
+					"name": "订单列表",
+					"pathName": "pages/dingdanlist/dingdanlist",
 					"query": ""
 				},
 				{
-					"id": 1,
-					"name": "测试",
-					"pathName": "pages/IntelligentForeignEducation/IntelligentForeignEducation",
+					"id": -1,
+					"name": "rili",
+					"pathName": "pages/dakarili/dakarili",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "打卡成功",
+					"pathName": "pages/dakacehnggong/dakchenggong",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "打卡",
+					"pathName": "pages/PunchTheClock/PunchTheClock",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "我的订单",
+					"pathName": "pages/dingdanlist/dingdanlist",
 					"query": ""
 				}
 			]

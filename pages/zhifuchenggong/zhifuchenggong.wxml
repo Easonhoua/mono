@@ -1,0 +1,7 @@
+<view class="zhifuchenggview">
+  <image src="../../images/zhifuchenggong.png" class="chenggongimg"></image>
+  <text class="chenggongtxt">支付成功</text>
+  <text class="chenggongtips">使用注册手机登录魔脑</text>
+  <text class="chenggongtips">APP/设备可使用外教陪读服务</text>
+  <view class="gobackindex" bindtap='gobacktoindex'>返回首页>></view>
+</view>

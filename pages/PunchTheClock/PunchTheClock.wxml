@@ -1,0 +1,30 @@
+<view class="PunchView">
+  <view class="LearningContent">
+    <view class="LearningExperience">
+      <text class="bigtxt">今日学习内容</text>
+      <text class="smalltxt">（最多选两项）</text>
+    </view>
+    <view class="contentview">
+      <block wx:for="{{ imagelist }}" wx:key="{{item}}">
+        <view class="contentviewlist" bindtap='selstudycon' data-val="{{ item.val}}" data-index="{{index}}">
+          <image src="{{ item.url }}" class="mianImg"></image>
+          <image src="../../images/GrayHook.png" class="hook gray" hidden='{{item.orangeicon}}'></image>
+          <image src="../../images/orangeHook.png" class="hook orange"></image>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="feedbackview">
+    <view class="LearningExperience">
+      <text class="bigtxt">今日学习心得</text>
+      <text class="smalltxt">（记录学习笔记）</text>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+      <textarea class="feedbacktxt" placeholder="记录和分享今日的学习笔记！" maxlength='100' name="textarea" />
+      <button form-type="submit" class="subBtn">
+        <text>完成打卡</text>
+        <view class="dateTxt">{{curdeta}}</view>
+      </button>
+    </form>
+  </view>
+</view>

@@ -9,14 +9,9 @@ var that;
 var list = [
   {
     image: '../../images/AIteacher.png',
-    open: false,
     url: '../IntelligentForeignEducation/IntelligentForeignEducation?packageType=2'
-  }
-  //  {
-  //   image: '../../images/sirenTeacher.png',
-  //   open: false,
-  //   url: '../PrivateTutor/PrivateTutor?packageType=1'
-  // }
+  },
+  //  
 ];
 
 
@@ -51,30 +46,29 @@ Page({
 
   onLoad: function () {
     that = this;
-    app.getLogin().then(function(ret){
+    app.getLogin().then(function (ret) {
       // console.log(ret)
-
-      if (ret.data.code == 9002){
+      if (ret.data.code == 9002) {
         that.setData({
-           showModal: true,
-           openid: ret.data.body.openid
-         })
-      } else if (ret.data.code == 9000){
+          showModal: true,
+          openid: ret.data.body.openid
+        })
+      } else if (ret.data.code == 9000) {
         wx.showToast({
           title: "网络错误",
           icon: 'none'
         });
-      } else if (ret.data.code == 9005){
+      } else if (ret.data.code == 9005) {
         wx.showToast({
           title: "参数不能为空",
           icon: 'none'
         });
-      } else if (ret.data.code == 9008){
+      } else if (ret.data.code == 9008) {
         wx.showToast({
           title: "没有权限",
           icon: 'none'
         });
-      } else if (ret.data.code == 8000){
+      } else if (ret.data.code == 8000) {
         wx.setStorage({
           key: 'avatarUrl',
           data: ret.data.body.avatarUrl,
@@ -87,10 +81,39 @@ Page({
           key: 'monoid',
           data: ret.data.body.monoid,
         })
+        wx.setStorage({
+          key: 'openid',
+          data: ret.data.body.openid,
+        })
+        wx.setStorage({
+          key: 'continueday',
+          data: ret.data.body.continueday,
+        })
       }
     })
   },
+
+
+    
   
+  IntelligentForeignEducation(){
+    wx.navigateTo({
+      url: '../IntelligentForeignEducation/IntelligentForeignEducation?packageType=2',
+    })
+  },
+
+  gotaocan(){
+    var monoid = wx.getStorageSync('monoid')
+    if (monoid){
+      wx.navigateTo({
+        url: '../PrivateTutor/PrivateTutor?packageType=1',
+      })
+    }else{
+      wx.navigateTo({
+        url: '../monobang/monobang',
+      })
+    }
+  },
   getUserInfo: function(e) {
     this.hideModal();
     if (e.detail.userInfo == undefined){

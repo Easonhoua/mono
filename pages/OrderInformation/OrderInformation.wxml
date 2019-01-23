@@ -1,3 +1,49 @@
+<!--logs.wxml-->
 <view class="orderinfoview">
-    <text>哈哈哈</text>
+  <view class="orderinfoviewTop">
+    <view class="detailimhview">
+      <image class="detailImg" src="{{imgsrc}}"></image>
+    </view>
+    <view class="detailview">
+      <text class="titleTxt">{{ titleTxt }}</text>
+      <text class="newprice">￥{{nowPrice}}</text>
+      <view class="jiajianview">
+        <image class="jian" src="../../images/jian.png" bindtap='jian'></image>
+        <input class="geshu" value='{{ num}}'></input>
+        <image class="jia" src="../../images/jia.png" bindtap='jia'></image>
+      </view>
+    </view>
+  </view>
+  <form bindsubmit="formSubmit">
+    <view class="orderinfoviewCenter">
+      <!-- <view class="phoneView">
+        <text class="telephonenum">* 手机号码</text>
+        <input placeholder='请输入套餐使用者号码' class="telinpt" name="phonenumber"></input>
+        <view class="yanzhengma" bindtap='modalyanzheng'>验证码</view>
+      </view> -->
+      <view class="addressView">
+        <view class="addressViewtop">
+          <text class="MailingAddress">* 邮寄地址：</text>
+          <view class="section">
+            <picker mode="region" bindchange="bindRegionChange" name="addresspicker" value="{{region}}" custom-item="{{customItem}}">
+              <view class="picker">
+                {{region[0]}}--{{region[1]}}--{{region[2]}}
+              </view>
+            </picker>
+          </view>
+          <!-- <image class="xialaBtn" src="../../images/gengduo.png"></image> -->
+        </view>
+        <input placeholder='详细地址' name="Detailedaddress" class="Detailedaddress"></input>
+      </view>
+      <view class="Addresseeview">
+        <text class="shoujianren">* 收件人：</text>
+        <input class="shoujianreninpt" name="shoujirenname"></input>
+      </view>
+      <view class="contectnum">
+        <text class="contecttel">* 联系电话：</text>
+        <input class="contectinpt" name="contectphonenumber" type='number' maxlength="11"></input>
+      </view>
+    </view>
+    <button form-type="submit" class="orderinfoviewBottom">下一步</button>
+  </form>
 </view>

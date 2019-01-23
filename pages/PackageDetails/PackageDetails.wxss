@@ -1,88 +1,120 @@
-.outview{
+.outview {
   width: 710rpx;
   height: 100%;
   padding: 20rpx;
 }
 
-.topcontainer{
+.topcontainer {
   width: 710rpx;
   height: 515rpx;
-  border-bottom: 1px solid #D8D8D8; 
+  border-bottom: 1px solid #d8d8d8;
 }
-.detailImg{
+
+.detailImg {
   display: block;
   width: 710rpx;
   height: 320rpx;
-  border: 1px solid #ccc;
+  border-radius: 15rpx;
 }
-.titleTxt{
+
+.titleTxt {
   display: block;
   margin-top: 20rpx;
   font-family: PingFang-SC-Regular;
   font-size: 38rpx;
-  color: #333333;
+  color: #333;
   letter-spacing: 0;
   font-weight: 900;
 }
-.newprice{
+
+.newprice {
   display: block;
   font-family: PingFang-SC-Regular;
   font-size: 40rpx;
-  color: #FF6259;
+  color: #ff6259;
   letter-spacing: 0;
   line-height: 70rpx;
 }
-.oldprice{
+
+.oldprice {
   display: inline-block;
   font-family: PingFang-SC-Regular;
   font-size: 14px;
-  color: #666666;
+  color: #666;
   letter-spacing: 0;
   float: left;
+  position: relative;
+  background:linear-gradient(3deg, transparent 47%, #666666 47%, #666666 53%, transparent 53%);
 }
-.totalsell{
+
+.totalsell {
   display: inline-block;
   font-family: PingFang-SC-Regular;
   font-size: 14px;
-  color: #666666;
+  color: #666;
   letter-spacing: 0;
   float: right;
 }
 
-.bottomcontainer{
+.bottomcontainer {
   width: 750rpx;
-  height: 300rpx;
+  height: 130rpx;
   position: fixed;
   bottom: 0;
   left: 0;
 }
-.kefuimg{
+
+.kefuview{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80rpx;
+  height: 110rpx;
+  position: absolute;
+  left: 60rpx;
+  bottom: 15rpx;
+}
+
+.kefubtn{
+  width: 80rpx;
+  height: 110rpx;
+  position: absolute;
+  left: 0rpx;
+  bottom: 0rpx;
+  background: transparent;
+  border: none;
+}
+
+.kefubtn::after{
+  border: none;
+}
+
+
+
+.kefuimg {
   display: block;
   width: 64rpx;
   height: 64rpx;
-  position: absolute;
-  left: 60rpx;
-  bottom: 54rpx;
 }
-.kefutxt{
+
+.kefutxt {
   font-family: PingFangSC-Regular;
   font-size: 24rpx;
-  color: #333333;
+  color: #333;
   letter-spacing: 0;
-  position: absolute;
-  left: 64rpx;
-  bottom: 18rpx;
 }
-.goumaiBtn{
+
+.goumaiBtn {
   width: 420rpx;
   height: 108rpx;
-  background: #FF6259;
+  background: #ff6259;
   border-radius: 77px;
   line-height: 108rpx;
   text-align: center;
   font-family: PingFang-SC-Regular;
-  font-size: 24px;
-  color: #FFFFFF;
+  font-size: 48rpx;
+  color: #fff;
   letter-spacing: 0;
   position: absolute;
   right: 60rpx;

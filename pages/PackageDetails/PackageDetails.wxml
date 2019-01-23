@@ -1,16 +1,22 @@
 <view class="outview">
   <view class="topcontainer">
-    <image class="detailImg" ></image>
+    <image class="detailImg" src="{{filePath}}"></image>
     <text class="titleTxt">{{ titleTxt }}</text>
-    <text class="newprice">￥9.00</text>
-    <text class="oldprice">原价￥20.00</text>
-    <text class="totalsell">销量：2998</text>
-</view>
+    <text class="newprice">￥{{nowPrice}}</text>
+    <text class="oldprice">原价￥{{originalPrice}}</text>
+    <text class="totalsell">销量：{{sales}}</text>
+  </view>
   <view class="bottomcontainer">
+  <view class="kefuview">
+    <button open-type="contact" class="kefubtn"></button>
     <image class="kefuimg" src="../../images/kefuimg.png"></image>
     <text class="kefutxt">客服</text>
-    <view class="goumaiBtn">立即购买</view>
+  </view>
+    
+    <view class="goumaiBtn">
+      <navigator url='../OrderInformation/OrderInformation?titleTxt={{titleTxt}}&nowPrice={{nowPrice}}&bizOpt={{bizOpt}}&imgsrc={{filePath}}'>
+        立即购买
+      </navigator>
+    </view>
   </view>
 </view>
-
-

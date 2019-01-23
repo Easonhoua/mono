@@ -1,0 +1,13 @@
+<view class="monobangView">
+  <form bindsubmit="formSubmit">
+    <input class="phonenumber" placeholder='输入魔脑号登陆手机号码' name="phonenumber" bindinput='getphonenum'></input>
+    <view class="yanzhengView">
+      <input class="yanzhenginpt" type='number' maxlength="11" placeholder='输入验证码' name="yanzhengnum"/>
+      <view class="yanzhengBtn" bindtap='getyanzhengcode'>{{time}}</view>
+    </view>
+    <button form-type="submit" class="bangdingBtn">绑定</button>
+  </form>
+  <text class="txt1">绑定魔脑号将可同步小程序积分等信息</text>
+  <text class="txt2">如果没有魔脑号，绑定后即可获得魔脑号，</text>
+  <text class="txt3">可登陆魔脑APP或设备</text>
+</view>

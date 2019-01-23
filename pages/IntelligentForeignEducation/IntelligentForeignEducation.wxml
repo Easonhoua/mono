@@ -7,21 +7,21 @@
           <image class="avatar-img" src="../../images/monologo.png"></image>
           <view class="isayinforView">
             <view class="chineseWord">{{item.src.data}}</view>
-            <text class="EnglishWord" bindtap='englishvioce' data-Enword="{{ item.src.dataEn }}">{{ item.src.dataEn}}</text>
+            <text class="EnglishWord" bindtap='englishvioce' data-index='{{ item.index }}' data-Enword="{{ item.src.dataEn }}">{{ item.src.dataEn}}</text>
             <text class="followread">跟mono朗读</text>
-            <image class="graysound" src="../../images/garysound.png"></image>
+            <image class="graysound" src="../../images/garysound3.png"></image>
           </view>
         </view>
         <view id="roll{{index + 1}}" class="chat-right" wx:if="{{item.orientation == 'r'}}">
           <view class="contentview">
-            <view class="yinpinBtn" style='width:{{ item.viewWidth }}' bindtap='mineVioce' data-src="{{ item.src }}"></view>
+            <view class="yinpinBtn" style='width:{{ item.viewWidth }}' bindtap='mineVioce' data-index='{{ item.index }}'  data-src="{{ item.src }}"></view>
             <text class="secondNum">{{ item.secondTime }}"</text>
-            <image class="whitesound" src='../../images/whitesound.png'></image>
+            <image class="whitesound" src='../../images/whitesound3.png'></image>
             <image class="rightIcon" src="../../images/RIght2.png" hidden='{{ item.rightIcon }}'></image>
             <image class="wrongIcon" src="../../images/error2.png" hidden='{{ item.wrongIcon }}'></image>
           </view>
           <image class="avatar-img" src="{{ userLogoUrl }}"></image>
-          <text class=" righttxt" hidden='{{ item.righttxt }}'>跟读准确，请继续练习</text>
+          <text class="righttxt" hidden='{{ item.righttxt }}'>跟读准确，请继续练习</text>
           <text class="wrongtxt" hidden='{{ item.wrongtxt }}'>跟读有误，再读一遍</text>
         </view>
       </block>
@@ -33,9 +33,9 @@
     <text class="anzhuBtn">按住说中文</text>
   </view>
 
-  <view class="ask-input-word" hidden='{{ EnglishBtn }}'bindtouchstart="touchdownEnglish" bindtouchend="touchupEnglish">
-      <image src="../../images/holdtalk.png" class="talkimg"></image>
-      <text class="anzhuBtn">按住跟读</text>
+  <view class="ask-input-word" hidden='{{ EnglishBtn }}' bindtouchstart="touchdownEnglish" bindtouchend="touchupEnglish">
+    <image src="../../images/holdtalk.png" class="talkimg"></image>
+    <text class="anzhuBtn">按住跟读</text>
   </view>
 </view>
 <image class="speaker" hidden="{{!isSpeaking}}" src="{{speakerUrl}}"></image>

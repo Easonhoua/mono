@@ -1,0 +1,77 @@
+<!--导航条-->
+<view class="dingdanview">
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+
+  <!--全部订单-->
+  <view hidden="{{currentTab!==0}}" class="dingdanlist">
+    <block wx:for="{{ listData }}" wx:key="item">
+      <view class="kind-list__item">
+        <view class="itemViewimg">
+          <image class="kind-list__img" src="{{ item.imgPath }}"></image>
+        </view>
+        <view class="itemViewword">
+          <text class='taocanTitle'>{{ item.bizOptName }}</text>
+          <text class="taocanprice">￥{{ item.amountS }}</text>
+          <text class="tancaonum">x{{ item.count }}</text>
+          <text class="taocanremark">优惠券：{{item.discountCoupon}}</text>
+          <text class="hejijiage">合计：￥{{ item.amountS }}</text>
+          <block wx:if="{{ item.state == 0 }}">
+            <view class="querenfukuan" bindtap='querengopay' data-nonceStr='{{ item.nonceStr}}' data-prepayId='{{item.prepayId}}' data-sign="{{ item.sign }}" data-timeStamp='{{ item.timeStamp  }}'>确认付款</view>
+            <view class='quxiaodingdan' bindtap='cancalOrder' data-order_no="{{ item.order_no }}" data-id="{{ item.userid }}">取消订单</view>
+          </block>
+          <block wx:else>
+            <view class="keshiyongnum">可使用手机号码：{{ item.mobilePhone }}</view>
+            <view class='yifukuan'>已付款</view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!--未付款-->
+  <view hidden="{{currentTab!==1}}" class="dingdanlist">
+    <block wx:for="{{ listData }}" wx:key="item">
+      <view class="kind-list__item">
+        <view class="itemViewimg">
+          <image class="kind-list__img" src="{{ item.imgPath }}"></image>
+        </view>
+        <view class="itemViewword">
+          <text class='taocanTitle'>私人外教</text>
+          <!--{{ item.bizOptName}}-->
+          <text class="taocanprice">￥{{ item.amountS }}</text>
+          <text class="tancaonum">x{{ item.count }}</text>
+          <text class="taocanremark">优惠券：{{item.discountCoupon}}</text>
+          <text class="hejijiage">合计：￥{{ item.amountS }}</text>
+          <view class="querenfukuan" bindtap='querengopay' data-nonceStr='{{ item.nonceStr}}' data-prepayId='{{item.prepayId}}' data-sign="{{ item.sign }}" data-timeStamp='{{ item.timeStamp  }}'>确认付款</view>
+          <view class='quxiaodingdan' bindtap='cancalOrder' data-order_no="{{ item.order_no }}" data-id="{{ item.userid }}">取消订单</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!--已付款-->
+  <view hidden="{{currentTab!==2}}" class="dingdanlist">
+    <block wx:for="{{ listData }}" wx:key="item">
+      <view class="kind-list__item">
+        <view class="itemViewimg">
+          <image class="kind-list__img" src="{{ item.imgPath }}"></image>
+        </view>
+        <view class="itemViewword">
+          <text class='taocanTitle'>私人外教</text>
+          <!--{{ item.bizOptName}}-->
+          <text class="taocanprice">￥{{ item.amountS }}</text>
+          <text class="tancaonum">x{{ item.count }}</text>
+          <text class="taocanremark">优惠券：{{item.discountCoupon}}</text>
+          <text class="hejijiage">合计：￥{{ item.amountS }}</text>
+          <view class="keshiyongnum">可使用手机号码：{{ item.mobilePhone }}</view>
+          <view class='yifukuan'>已付款</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+
+</view>

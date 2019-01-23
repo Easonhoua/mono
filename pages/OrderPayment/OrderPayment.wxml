@@ -1,0 +1,13 @@
+<!--pages/OrderPayment/OrderPayment.wxml-->
+<view class="orderinfoview">
+  <view class="orderinfoviewTop">
+    <image class="detailImg" src="{{imgsrc}}"></image>
+    <text class="titleTxt">{{ titleTxt }}</text>
+    <text class="newprice">￥{{nowPrice}}</text>
+    <view class="geshu">{{ num}}份</view>
+  </view>
+  <view class="orderinfoviewbottom">
+      <text class="totalprice">合计：￥{{nowPrice}}</text>
+      <view class="weixinzhifubtn" bindtap='weixinzhifu'>微信支付</view>
+    </view>
+</view>

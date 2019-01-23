@@ -68,17 +68,13 @@ swiper {
   overflow: hidden;
 }
 
-.kind-list__item:first-child {
-  margin-top: 20rpx;
-}
-
 .kind-list__img {
   width: 710rpx;
   height: 260rpx;
 }
 
 .kind-list__item-hd {
-  padding: 0 20rpx 20rpx 20rpx;
+  padding: 10rpx 20rpx;
   width: 710rpx;
   height: 260rpx;
   -webkit-transition: opacity 0.3s;

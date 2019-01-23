@@ -1,0 +1,40 @@
+<view class="dakariliview">
+  <view class="toprili">
+    <view class="tiptxt">已连续打卡{{continueday}}天，继续加油</view>
+    <calendar calendar-style="calendar" header-style="calendar-header" board-style="calendar-board" days-color="{{dayStyle}}" weeks-type="cn" binddayClick="dayClick" bindnextMonth="bindnextMonth" bindprevMonth="bindprevMonth" binddateChange="dateChange" />
+  </view>
+  <view class="dakaxindeview">
+    <block wx:for="{{ xindelist }}" wx:key="{{ item}}">
+      <view class="xindeitem">
+        <view class="touxiang">
+          <image class="touxiangimg" src="{{ item.avatarUrl }}"></image>
+        </view>
+        <view class="maincontent">
+          <view class="nickname">{{ item.nickName }}</view>
+          <block wx:if="{{ nowdata }}">
+            <view class="timeanddate">{{ item.createtime }}前 已坚持{{ item.continueday }}天</view>
+          </block>
+          <block wx:else="{{ pastdata }}">
+            <view class="timeanddate">{{ item.lastmarktime }} 已坚持{{ item.continueday }}天</view>
+          
+          </block>
+          <view class="contenttxt">{{ item.note }}</view>
+          <view class="classcontent">{{ item.contentIds }}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="shareview" bindtap='goshare' wx:if='{{ isdaka }}'>
+      <text class='sharebtn'>生成我的打卡报告</text>
+  </view>
+
+
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+      <image src="{{imagePath}}" class='shengcheng'></image>
+      <button class='baocun' bindtap='baocun'>保存相册，分享到朋友圈</button>
+    </view>
+   <view hidden="{{maskHidden == false}}" class="mask"></view> 
+  <view class="canvas-box">
+      <canvas  style="width: 375px;height: 667px;position:fixed;top:9999px" canvas-id="mycanvas"/>
+  </view> 
+</view>

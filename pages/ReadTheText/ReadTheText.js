@@ -176,20 +176,16 @@ Page({
   },
 
   sendSocketMessage(msg) {
-    var that = this;
+    that = this;
     wx.sendSocketMessage({
       data: msg,
       success: function (res) {
-        console.log('已发送', res)
+        // console.log('已发送', res)
       },
       fail: function (fail) {
         console.log(fail)
         wx.hideLoading();
-        wx.showToast({
-          title: '信息发送失败！',
-          duration: 2000,
-          icon:'none'
-        })
+        
       }
     })
   },
@@ -217,7 +213,10 @@ Page({
     });
 
     recorderManager.onError((res) => {
-      console.log(res)
+      // console.log(res)
+      that.setData({
+        isSpeaking: false,
+      })
       // wx.showToast({
       //   title: '网络异常！',
       //   duration: 2000,

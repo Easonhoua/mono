@@ -1,0 +1,176 @@
+.orderinfoview {
+  width: 100%;
+  height: 100%;
+  padding: 30rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.orderinfoviewTop {
+  width: 100%;
+  height: 260rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.titleTxt {
+  font-size: 38rpx;
+  color: #333;
+  letter-spacing: 0;
+}
+
+.newprice {
+  position: absolute;
+  font-size: 40rpx;
+  color: #ff6259;
+  bottom: 34rpx;
+  left: 0rpx;
+}
+detailimhview{
+  height: 260rpx;
+  float: left;
+}
+.detailImg {
+  width: 306rpx;
+  height: 232rpx;
+}
+
+.detailview{
+  width: 360rpx;
+  height: 260rpx;
+  margin-left: 20rpx;
+  float: left;
+  position: relative;
+}
+
+.jiajianview {
+  width: 100rpx;
+  height: 40rpx;
+  position: absolute;
+  right: -32rpx;
+  bottom: -5rpx;
+}
+
+.jia {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 6rpx;
+  bottom: 44rpx;
+}
+
+.jian {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 86rpx;
+  bottom: 44rpx;
+}
+
+.geshu {
+  width: 36rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 40rpx;
+  /* border: 1px solid #000000; */
+}
+
+.orderinfoviewCenter {
+}
+
+.phoneView, .Addresseeview, .contectnum {
+  display: flex;
+  justify-content: space-between;
+  height: 100rpx;
+}
+
+.telephonenum, .MailingAddress, .shoujianren, .contecttel {
+  min-width:180rpx;
+  font-size: 32rpx;
+  color: #666;
+  line-height: 60rpx;
+}
+
+.telinpt {
+  width: 360rpx;
+  border-bottom: 1rpx solid #999;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.yanzhengma {
+  width: 164rpx;
+  height: 68rpx;
+  background: #32bbff;
+  border-radius: 14rpx 15rpx 15rpx 14rpx;
+  font-size: 28rpx;
+  line-height: 68rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.Detailedaddress {
+  height: 60rpx;
+  width: 100%;
+  border-bottom: 1rpx solid #999;
+  margin-top: 40rpx;
+  /* text-indent: 20rpx; */
+  color: #666;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.shoujianreninpt {
+  border-bottom: 1rpx solid #999;
+  width: 82%;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.contectinpt {
+  border-bottom: 1rpx solid #999;
+  width: 72%;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.addressViewtop {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.addressView {
+  width: 100%;
+  height: 214rpx;
+}
+
+.section {
+  font-size: 14px;
+  color: #999;
+  background: #eee;
+  border-radius: 10rpx;
+  min-width: 380rpx;
+  max-width: 489rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  margin-left: 20rpx;
+  padding: 0 10rpx;
+  overflow: hidden;
+}
+
+.orderinfoviewBottom {
+  width: 418rpx;
+  height: 108rpx;
+  background: #ff6259;
+  border-radius: 154px;
+  text-align: center;
+  line-height: 108rpx;
+  font-size: 48rpx;
+  color: #fff;
+  position: fixed;
+  bottom: 20rpx;
+  left: 20%;
+}
+

@@ -38,7 +38,8 @@ Page({
   },
 
   hideModal: function () {
-    this.setData({
+    that = this;
+    that.setData({
       showModal: false
     });
   },
@@ -96,14 +97,20 @@ Page({
         }, 100);
       }
     })
+
+
+    myaudio.onEnded(function(e){
+      console.log(e)
+    })
+
   },
 
   sendSocketMessage(msg) {
-    var that = this;
+    that = this;
     wx.sendSocketMessage({
       data: msg,
       success: function (res) {
-        console.log('已发送', res)
+        // console.log('已发送', res)
       },
       fail: function (fail) {
         wx.hideLoading();
@@ -285,7 +292,7 @@ Page({
   },
 
   baidurequest(word){
-    var that = this
+    that = this
     wx.request({
       url: tokenhttps +'grant_type=client_credentials&client_id=S0uoANfKnvmH0qiVahBRm84i&client_secret=R11Y4xxLoM9Sl6nO67O3uYTAo8TXA95E',
       success:function(res){
@@ -321,8 +328,8 @@ Page({
   englishvioce(e){
     var myaudioword = encodeURIComponent(encodeURIComponent(e.target.dataset.enword))
     var acctkoen = this.data.token
-    myaudio.title = "兼容ios"
-    myaudio.src = tsn + 'lan=zh&ctp=1&cuid=50-9A-4C-0F-ED-08&tok=' + acctkoen +'&tex=' + myaudioword +'&vol=15&per=4&spd=4&pit=5&aue=3'
+    myaudio.title = "兼容ios"//vol=15&per=4&spd=4&pit=2&aue=3
+    myaudio.src = tsn + 'lan=zh&ctp=1&cuid=50-9A-4C-0F-ED-08&tok=' + acctkoen +'&tex=' + myaudioword +'&vol=15&per=4&spd=4&pit=2&aue=3'
     myaudio.play()
   },
 
@@ -347,6 +354,10 @@ Page({
     }
   },
 
+
+  
+
+
   onUnload: function () {
     if (res.platform == 'ios') {
       myaudio.stop()
@@ -358,6 +369,7 @@ Page({
 
   speaking: function () {
     //话筒帧动画 
+    that = this
     var i = 0;
     that.speakerInterval = setInterval(function () {
       i++;
@@ -367,6 +379,19 @@ Page({
       });
     }, 300);
   },
+
+  // speaking: function () {
+  //   //话筒帧动画 
+  //   that = this
+  //   var i = 0;
+  //   that.speakerInterval = setInterval(function () {
+  //     i++;
+  //     i = i % 7;
+  //     that.setData({
+  //       speakerUrl: '../../images/speaker' + i + '.png',
+  //     });
+  //   }, 300);
+  // },
   getUserInfo: function (e) {
     this.hideModal();
     this.setData({

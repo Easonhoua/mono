@@ -1,6 +1,6 @@
 var app = getApp();
 const Monohttps = app.globalData.Monohttps
-
+var that;
 Page({
   data: {
     list: [],
@@ -11,7 +11,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
+    that = this
     let optData1 = options.val
     let optData2 = options.lan
     wx.setStorageSync('val', optData1)

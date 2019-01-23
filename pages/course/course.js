@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const httpUrl = 'https://http.aismono.net'
+const Monohttps = app.globalData.Monohttps
 var swiper = [
   "../../images/Advertising2.png",
 ];
@@ -66,7 +66,7 @@ Page({
       ver: "1.0"
     }
     wx.request({
-      url: httpUrl + '/mono-biz-app/educationMiniProgram/queryClassType',
+      url: Monohttps + '/mono-biz-app/educationMiniProgram/queryClassType',
       method: 'post',
       data: paramJson,
       success:function(res){

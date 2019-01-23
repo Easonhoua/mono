@@ -1,29 +1,25 @@
-// pages/PrivateTutor/PrivateTutor.js
 var app = getApp();
 var that;
 const Monohttps = app.globalData.Monohttps;
-var swiper = [
-  "../../images/sirenTeacher.png",
-];
+// var swiper = [
+//   "../../images/Advertising2.png",
+// ];
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    swiperlist: swiper,
+    // swiperlist: swiper,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    Listofpackages:[]
+    Listofpackages: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     that = this;
     var packageType = options.packageType
+    var monoid = wx.getStorageSync('monoid')
     var param = {
       packageType: packageType
     }
@@ -38,23 +34,37 @@ Page({
       url: Monohttps + '/mono-biz-app/educationMiniProgram/getMiniProgramPackages',
       method: 'post',
       data: paramJson,
-      success: function (res) {
+      success: function(res) {
         // console.log(res)
         let resData = res.data.body
         that.setData({
           Listofpackages: resData
         })
       },
-      fail:function(fail){
+      fail: function(fail) {
         console.log(fail)
       },
     })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+
+  onShow: function(options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

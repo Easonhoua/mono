@@ -13,21 +13,20 @@
 
   <!-- 文章列表面板 -->
   <view class="page__bd page__bd_spacing">
-    <view class="kind-list">
-      <block wx:for="{{list}}" wx:key="id">
-        <view class="kind-list__item">
-        <navigator url="{{item.url}}" class="weui-cell weui-cell_access">
-          <view class="weui-flex kind-list__item-hd">
-            <image class="kind-list__img" src="{{ item.image }}"></image>
-          </view>
-          </navigator>
+      <view class="kind-list__item" bindtap='IntelligentForeignEducation'>
+        <view class="weui-flex kind-list__item-hd">
+          <image class="kind-list__img" src="../../images/AIteacher.png"></image>
         </view>
-      </block>
+      </view>
+      <view class="kind-list__item" bindtap='gotaocan'>
+        <view class="weui-flex kind-list__item-hd">
+          <image class="kind-list__img" src="../../images/sirenwaijiao.png"></image>
+        </view>
+      </view>
     </view>
-  </view>
 </view>
 
-<view class="modal-mask"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
   <view class="modal-title">授权确认</view>
   <view class="modal-content">
@@ -35,6 +34,6 @@
   </view>
   <view class="modal-footer">
     <!-- <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view> -->
-    <button class="btn-confirm" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-status="confirm">确认授权</button> 
+    <button class="btn-confirm" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-status="confirm">确认授权</button>
   </view>
 </view>

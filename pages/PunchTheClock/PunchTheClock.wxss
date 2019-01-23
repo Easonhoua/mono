@@ -1,0 +1,90 @@
+/* pages/PunchTheClock/PunchTheClock.wxss */
+.PunchView{
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.feedbackview{
+  width: 710rpx;
+  height: 188rpx;
+  /* padding: 30rpx; */
+  box-sizing: border-box;
+}
+.feedbacktxt{
+  width: 100%;
+  height: 188rpx;
+  background: rgba(204,204,204,0.60);
+  box-shadow: 0 2px 4px 0 rgba(153,153,153,0.25);
+  border-radius: 15rpx;
+  padding: 20rpx;
+  margin-bottom: 60rpx;
+  box-sizing: border-box;
+  font-family: PingFang-SC-Regular;
+  font-size: 24rpx;
+  color: #666666;
+  letter-spacing: 0;
+}
+.LearningExperience{
+  padding-left: 20rpx; 
+  padding-bottom: 10rpx;
+}
+.bigtxt{
+  font-family: PingFang-SC-Regular;
+  font-size: 36rpx;
+  color: #333333;
+  letter-spacing: 0;
+}
+.smalltxt{
+  font-family: PingFang-SC-Regular;
+  font-size: 26rpx;
+  color: #2A2A2A;
+  letter-spacing: 0;
+  line-height: 25px;
+}
+.subBtn{
+  width: 466rpx;
+  height: 92rpx;
+  background-image: linear-gradient(-180deg, #EE9031 0%, #F95D23 100%);
+  border-radius: 15rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  line-height: 68rpx;
+  position: relative;
+}
+.dateTxt{
+  position: absolute;
+  font-size: 12px;
+  left: 144rpx;
+  top: 35rpx;
+}
+.LearningContent{
+  margin-bottom: 30rpx;
+}
+.contentview{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+}
+.contentviewlist{
+  position: relative;
+}
+.mianImg{
+  width:346rpx;
+  height: 188rpx;
+}
+.hook{
+  position: absolute;
+  right: 20rpx;
+  bottom: 30rpx;
+  width: 44rpx;
+  height: 42rpx;
+}
+.gray{
+  z-index: 1
+}
+.orange{
+  z-index: 0;
+}

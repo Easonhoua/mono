@@ -1,0 +1,73 @@
+/* pages/monobang/monobang.wxss */
+page{
+  width: 100%;
+  height: 100%;
+}
+.monobangView{
+  width: 100%;
+  height: 100%;
+  padding: 60rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction:column;
+  align-items: center; 
+}
+.phonenumber{
+  width: 628rpx;
+  height: 74rpx;
+  border: 1rpx solid #979797;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  color: #999999;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.yanzhengView{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-top: 30rpx;
+}
+.yanzhenginpt{
+  width: 396rpx;
+  height: 74rpx;
+  border: 1rpx solid #979797;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  color: #999999;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.yanzhengBtn{
+  width: 210rpx;
+  height: 72rpx;
+  border: 1rpx solid #979797;
+  border-radius: 15rpx;
+  text-align: center;
+  line-height: 72rpx;
+  margin-left: 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+}
+.bangdingBtn{                                   
+  width: 226rpx;
+  height: 74rpx;
+  background: #32BBFF;
+  border-radius: 15rpx;
+  font-size: 36rpx;
+  color: #FFFFFF;
+  line-height: 74rpx;
+  margin-top: 50rpx;
+}
+.txt1,.txt2,.txt3{
+  font-size: 32rpx;
+  color: #333333;
+}
+.txt1{
+  margin-top: 40rpx;
+}
+.txt2{
+  margin-top: 80rpx;
+  line-height: 50rpx;
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "calendar": "plugin://calendar/calendar"
+  },
+  "navigationBarTitleText": "打卡成功",
+  "navigationBarBackgroundColor": "#DC5829",
+  "navigationBarTextStyle": "#ffffff"
+}

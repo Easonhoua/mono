@@ -8,7 +8,10 @@
 }
 
 .kind-list{
-  padding: 0 0 0 20rpx;
+  width: 100%;
+  height: 100%;
+  padding:  0 20rpx;
+  box-sizing: border-box;
 }
 
 .kind-list__item{
@@ -35,21 +38,24 @@
   color: rgba(51, 51, 51, 1);
   font-size: 38rpx;
   font-family: PingFang-SC-Regular;
+  font-weight: 900;
 }
 
-.itemViewword .tancaodate{
+.tancaodate{
   display: block;
-  /* margin-top: 50rpx; */
+  font-size: 28rpx;
 }
 .itemViewword .taocanremark{
+  font-size: 32rpx;
   display: block;
-  margin-top: 50rpx;
+  margin-top: 40rpx;
 }
 
 .itemViewword .taocanprice{
   color: rgba(255, 98, 89, 1);
   font-size: 36rpx;
   font-family: PingFang-SC-Regular;
+  line-height: 60rpx;
 }
 
 .itemViewword .mashangqiang{
@@ -63,9 +69,25 @@
   right: 0rpx;
   font-size: 28rpx;
   color: #ffffff;
+  text-align: center;
+  border-radius: 15rpx;
 }
 
 .kind-list__img{
   width: 306rpx;
   height: 232rpx;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

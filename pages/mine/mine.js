@@ -2,39 +2,15 @@
 const app = getApp()
 const Monohttps = app.globalData.Monohttps;
 
-var list = [
-  {
-    id: 'about',
-    title: "我的订单",
-    url: '#',
-    images:'../../images/myaccount.png'
-  }, 
-  {
-    id: 'feedback',
-    title: "我的学习报告",
-    url: '#',
-    images: '../../images/studyreport.png'
-  }, 
-  {
-    id: 'redpacket',
-    title: "联系客服",
-    url: '#',
-    images: '../../images/kefu.png'
-  }
-];
-
 Page({
   data: {
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    list: list,
-    // userdataurlb: true,
-    // userdatanicknameb: true,
-    avatarb: false,
-    nicknameb: false,
     nickName: '',
-    avatarUrl: ''
+    avatarUrl: '',
+    // list: list,
+    hasmonoid: true,
+    monoid: '',
+    dakabtn:'',
+    curdeta: ''
   },
 
   phoneCall: function (e) {
@@ -49,75 +25,75 @@ Page({
   onLoad: function () {
     var touxiang = wx.getStorageSync('avatarUrl')
     var mingcheng = wx.getStorageSync('nickName')
+    var monoid = wx.getStorageSync('monoid')
+    if (monoid == 0) {
+      this.setData({
+        hasmonoid: false
+      })
+    } else {
+      this.setData({
+        hasmonoid: true,
+        monoid: monoid
+      })
+    }
     if (touxiang){
       this.setData({
         nickName: mingcheng,
         avatarUrl: touxiang
       })
-    }else{
-      console.log('2222')
     }
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse) {
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     console.log(res)
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
   },
-  // getUserInfo: function (e) {
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //     hasUserInfo: true
-  //   })
-  //   var jsonParam = {
-  //     openid: app.globalData.openid,
-  //     rawData: e.detail.rawData,
-  //     signature: e.detail.signature,
-  //     encrypteData: e.detail.encryptedData,
-  //     iv: e.detail.iv
-  //   }
+  gopunchview() {
+    var continueday = wx.getStorageSync('continueday')
+    if (continueday == 0) {
+      wx.navigateTo({
+        url: '../PunchTheClock/PunchTheClock',
+      })
+    } else if (continueday == 1) {
+      wx.navigateTo({
+        url: '../dakarili/dakarili',
+      })
+    }
+    
+  },
+  tips(){
+    wx.showToast({
+      title: '功能开发中',
+      icon: 'none'
+    })
+  },
+  getmonoid() {
+    wx.navigateTo({
+      url: '../monobang/monobang',
+    })
+  },
+  godingdanlist(){
+    wx.navigateTo({
+      url: '../dingdanlist/dingdanlist',
+    })
+  },
+  onShow(){
+    var myDate = new Date();
+    var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+    var month = myDate.getMonth() + 1;       //获取当前月份(0-11,0代表1月)
+    var date = myDate.getDate();        //获取当前日(1-31)
+    var str = "星期" + "日一二三四五六".charAt(new Date().getDay());
+    this.setData({
+      curdeta: year + "." + month + "." + date + " " + str
+    })
 
-  //   var realjson = {
-  //     body: jsonParam,
-  //     sys: "1",
-  //     sysVer: "html5",
-  //     token: "",
-  //     ver: "1.0"
-  //   }
+    var continueday = wx.getStorageSync('continueday')
+    if (continueday == 0) {
+      this.setData({
+        dakabtn: '打卡'
+      })
+    } else if (continueday == 1) {
+      this.setData({
+        dakabtn: '已打卡'
+      })
+    }
+  },
 
-  //   wx.request({
-  //     url: Monohttps + '/mono-biz-app/miniProgram/loginRegister',
-  //     method: 'post',
-  //     data: realjson,
-  //     success: function (res) {
-  //       console.log(res)
-  //     },
-  //     fail: function (fail) {
-  //       console.log(fail)
-  //     }
-  //   })
-  // },
   onShareAppMessage() {
 
   }

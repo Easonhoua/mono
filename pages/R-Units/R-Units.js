@@ -1,14 +1,14 @@
 // pages/R-Units/R-Units.js
 var app = getApp()
 const Monohttps = app.globalData.Monohttps;
-
+var that;
 Page({
   data: {
     curClass:'',
     list: {}
   },
   onLoad: function (options) {
-    let that = this
+    that = this
     var optData1 = wx.getStorageSync('val')
     if (optData1 == '0') {
       wx.setNavigationBarTitle({
@@ -58,6 +58,7 @@ Page({
       method: 'post',
       data: paramJson,
       success: function (res) {
+        // console.log(res)
         let listData = res.data.body
         that.setData({
           list: listData,

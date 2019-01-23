@@ -1,0 +1,67 @@
+/* pages/OrderPayment/OrderPayment.wxss */
+.orderinfoview {
+  width: 100%;
+  height: 100%;
+  padding: 30rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.orderinfoviewTop {
+  position: relative;
+  width: 100%;
+  height: 260rpx;
+}
+
+.titleTxt {
+  position: absolute;
+  font-size: 38rpx;
+  color: #333;
+  letter-spacing: 0;
+  left:160px;
+  top: 0rpx;
+}
+
+.newprice {
+  position: absolute;
+  font-size: 40rpx;
+  color: #ff6259;
+  bottom: 34rpx;
+  left: 315rpx;
+}
+
+.detailImg {
+  position: absolute;
+  width: 306rpx;
+  height: 232rpx;
+}
+.geshu {
+  width: 80rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 36rpx;
+  /* border: 1px solid #000000; */
+}
+.orderinfoviewbottom{
+  width: 94%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 20rpx;
+}
+.totalprice{
+  font-size: 40rpx;
+  color: #000000;
+}
+.weixinzhifubtn{
+  width:420rpx;
+  height: 108rpx;
+  text-align: center;
+  line-height: 108rpx;
+  color: #ffffff;
+  background: #FF6259;
+  border-radius: 154rpx;
+  font-size: 48rpx;
+}

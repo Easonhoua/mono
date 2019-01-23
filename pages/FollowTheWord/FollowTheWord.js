@@ -1,11 +1,13 @@
 var app = getApp();
 const Monohttps = app.globalData.Monohttps;
+var that;
 Page({
   data: {
     DataList :[],
     tempFilePaths: '../../images/Photograph2.png',
   },
   onLoad: function (options) {
+    that = this;
     var tid= options.tid
     var listWord = options.listword
     var wordarr = listWord.split(',')
@@ -20,12 +22,12 @@ Page({
       }
       allDatas.push(eachdata)
     }
-    this.setData({
+    that.setData({
       DataList: allDatas
     })
   },
   chooseimage: function (ev) {
-    let _this = this;
+    that = this;
     let evData = ev.currentTarget.dataset
     let thisindex = evData.index
     let word = evData.item.name
@@ -47,7 +49,7 @@ Page({
         var imgSrc = 'DataList[' + thisindex + '].src'
         var rightIcon = 'DataList[' + thisindex + '].rightIcon'
         var errorIcon = 'DataList[' + thisindex + '].errorIcon'
-        _this.setData({
+        that.setData({
           [imgSrc]: tempFilePaths,
         })
         wx.uploadFile({
@@ -57,12 +59,12 @@ Page({
           name: 'file', 
           success(ret) {
             if (JSON.parse(ret.data).code == 0){
-              _this.setData({
+              that.setData({
                 [errorIcon]: true,
                 [rightIcon] : false
               })
             }else{
-              _this.setData({
+              that.setData({
                 [rightIcon]: true,
                 [errorIcon]: false
               })

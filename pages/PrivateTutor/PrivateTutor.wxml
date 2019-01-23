@@ -1,26 +1,16 @@
-<view class='swiperbox'>
-  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{swiperlist}}" wx:key="item">
-      <swiper-item>
-        <image class="slide-image" src="{{item}}" class="slide-image" width="355" height="150" />
-      </swiper-item>
-    </block>
-  </swiper>
-</view>
-
 <view class="kind-list">
   <block wx:for="{{ Listofpackages }}" wx:key="item">
     <navigator url="../PackageDetails/PackageDetails?bizOpt={{ item.bizOpt }}">
       <view class="kind-list__item">
           <view class="itemViewimg">
-            <image class="kind-list__img" src="../../images/smallPicture.png"></image>
+            <image class="kind-list__img" src="{{ item.imgPath }}"></image>
           </view>
           <view class="itemViewword">
             <text class='taocanTitle'>{{ item.bizOptName}}</text>
             <text class="taocanremark">{{item.remark}}</text>
-            <text class="tancaodate">有效期：{{item.days }}天</text>
+            <text class="tancaodate">有效期：{{item.validityDate }}天</text>
             <text class="taocanprice">￥{{ item.amountS }}</text>
-            <button class="mashangqiang">马上抢</button>
+            <view class="mashangqiang">马上抢</view>
           </view>
         </view>
     </navigator>

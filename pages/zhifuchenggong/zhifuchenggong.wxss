@@ -1,0 +1,28 @@
+/* pages/zhifuchenggong/zhifuchenggong.wxss */
+.zhifuchenggview{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.chenggongimg{
+  width: 250rpx;
+  height: 250rpx;
+  margin: 20rpx;
+}
+
+.chenggongtxt{
+  font-size: 36rpx;
+  color: #FF6259;
+  margin-bottom: 20rpx;
+}
+.chenggongtips{
+  font-size: 32rpx;
+  color: #666666;
+}
+.gobackindex{
+  padding-top: 50rpx; 
+  color: green;
+}

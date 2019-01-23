@@ -1,38 +1,58 @@
-<view class="container">
-  <view class="userinfo">
-    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else> -->
-      <!-- <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" hidden='{{ userdataurl }}'></image> -->
-      <!-- <text class="userinfo-nickname" hidden='{{ userdatanickname }}'>{{userInfo.nickName}}</text> -->
+
+<view class="myview">
+  <view class="container">
+    <view class="userinfo">
       <image class="userinfo-avatar" src="{{avatarUrl}}" mode="cover" hidden='{{ avatar }}'></image>
       <text class="userinfo-nickname" hidden='{{ nickname }}'>{{nickName}}</text>
-    <!-- </block> -->
+      <!-- <view class="userinfo-avatar">
+      <open-data type="userAvatarUrl" ></open-data>
+      </view>
+      <open-data type="userNickName" class="userinfo-nickname"></open-data> -->
+      <view wx:if="{{ !hasmonoid }}" bindtap='getmonoid' class="bangmonobtn"> 绑定魔号 </view>
+      <block wx:else>
+        <text class="monoidtxt">魔脑号：{{ monoid }}</text>
+      </block>
+    </view>
   </view>
-</view>
 
-<!-- <view class="page"> -->
-  <!-- <template is="head" data="{{...item}}" /> -->
-  <!-- <view class="page__bd">
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel">
-        <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_small-appmsg">
-            <view class="weui-cells weui-cells_in-small-appmsg">
-            <block wx:for="{{list}}" wx:key="id">
-              <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__hd">
-                  <image src="{{ item.images }}" class="iconimg"/>
-                </view>
-                <view class="weui-cell__bd weui-cell_primary">
-                  <view class="titleword">{{item.title}}</view>
-                </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-              </navigator>
-            </block>
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_in-small-appmsg">
+        <view  class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='godingdanlist'>
+          <view class="weui-cell__hd">
+            <image src="../../images/myaccount.png" class="iconimg" />
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class="titleword">我的订单</view>
+          </view>
+          <image src='../../images/xiangyou1.png' class="rightIcon"></image>
+        </view> 
+
+        <view  class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='tips'>
+          <view class="weui-cell__hd">
+            <image src="../../images/studyreport.png" class="iconimg"/>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class="titleword">我的学习报告</view>
+          </view>
+          <image src='../../images/xiangyou1.png' class="rightIcon"></image>
+        </view> 
+
+        <view  class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <image src="../../images/kefu.png" class="iconimg"/>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view class="titleword">联系客服
+              <button open-type="contact" class="kefubtn"></button>
             </view>
           </view>
-        </view>
-      </view>
+          <image src='../../images/xiangyou1.png' class="rightIcon"></image>
+        </view> 
     </view>
-  </view> -->
-<!-- </view> -->
+  </view>
+
+  <view class="punchClock" bindtap="gopunchview">
+    <view class="dakaBtn">{{ dakabtn }}</view>
+    <view class="dateBtn">{{ curdeta }}</view>
+  </view>
+</view>

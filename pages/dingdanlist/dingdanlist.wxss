@@ -1,0 +1,188 @@
+page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dingdanview {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  background: #fff;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  position: fixed;
+  z-index: 100;
+}
+
+.navbar .item {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.navbar .item.active {
+  position: relative;
+  font-size: 32rpx;
+  color: #32bbff;
+}
+
+.navbar .item.active:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -20rpx;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: #32bbff;
+}
+
+.dingdanlist {
+  width: 100%;
+  height: 100%;
+  padding: 100rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.kind-list__item {
+  width: 100%;
+  height: 360rpx;
+  padding: 30rpx 0 0 0;
+}
+
+.itemViewimg {
+  width: 240rpx;
+  height: 360rpx;
+  float: left;
+}
+
+.itemViewword {
+  width: 440rpx;
+  height: 360rpx;
+  float: left;
+  margin-left: 30rpx;
+  position: relative;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.itemViewword .taocanTitle {
+  display: block;
+  width: 360rpx;
+  word-wrap: break-word;
+  word-break: normal;
+  color: rgba(51, 51, 51, 1);
+  font-size: 38rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: 900;
+}
+
+.tancaodate {
+  display: block;
+  font-size: 28rpx;
+}
+
+.itemViewword .taocanremark {
+  font-size: 32rpx;
+  display: block;
+  margin-top: 40rpx;
+}
+
+.itemViewword .taocanprice {
+  color: rgba(255, 98, 89, 1);
+  font-size: 36rpx;
+  font-family: PingFang-SC-Regular;
+  line-height: 60rpx;
+}
+
+.itemViewword .querenfukuan {
+  display: block;
+  width: 172rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  position: absolute;
+  bottom: 40rpx;
+  right: 0rpx;
+  font-size: 28rpx;
+  color: #ff6259;
+  text-align: center;
+  border: 1px solid #ff6259;
+  border-radius: 100rpx;
+}
+
+.itemViewword .quxiaodingdan {
+  display: block;
+  width: 172rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  position: absolute;
+  bottom: 40rpx;
+  left: 70rpx;
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  border: 1px solid #999;
+  border-radius: 100rpx;
+}
+
+.kind-list__img {
+  width: 240rpx;
+  height: 240rpx;
+}
+
+.tancaonum {
+  position: absolute;
+  bottom: 210rpx;
+  right: 0rpx;
+  font-size: 32rpx;
+  color: #666;
+}
+
+.taocanprice {
+  position: absolute;
+  bottom: 214rpx;
+  left: 0rpx;
+  font-size: 32rpx;
+  color: #666;
+}
+
+.hejijiage {
+  position: absolute;
+  right: 0rpx;
+  bottom: 150rpx;
+  font-size: 32rpx;
+}
+
+.taocanremark {
+  position: absolute;
+  left: 0rpx;
+  bottom: 150rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.keshiyongnum {
+  position: absolute;
+  bottom: 56rpx;
+  left: 0rpx;
+  font-size: 20rpx;
+}
+
+.yifukuan {
+  width: 172rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  position: absolute;
+  bottom: 40rpx;
+  left: 300rpx;
+  font-size: 28rpx;
+  color: #FF6259;
+  text-align: center;
+}
